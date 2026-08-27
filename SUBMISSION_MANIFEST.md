@@ -1,8 +1,8 @@
 # Day25 Final Submission Manifest
 
-Student: Nguyen Quang Huy  
-Student ID: 2A202601873  
-Assignment: Day25 - AI Pricing, GTM and Evidence  
+Student: Nguyen Quang Huy
+Student ID: 2A202601873
+Assignment: Day25 - AI Pricing, GTM and Evidence
 Product: P-015 AI Fraud Investigation Copilot
 
 Repository: https://github.com/Bietdoibongdem888/Track1_Day25_2A202601873_NguyenQuangHuy
@@ -59,8 +59,8 @@ One completed commercial job is one completed grounded investigation package wit
 - `git diff --check`: PASS.
 - Audit scripts reject the missing-workbook negative case: PASS.
 
-Final commit SHA: PENDING FINAL GIT COMMIT  
-Final remote HEAD: PENDING PUSH VERIFICATION
+Final commit SHA: 02100475e40d367845c819cc72e4e1e723aaa3f2 (hardening commit)
+Final remote HEAD: verified after push; see final certification
 
 ## Submission decision
 
