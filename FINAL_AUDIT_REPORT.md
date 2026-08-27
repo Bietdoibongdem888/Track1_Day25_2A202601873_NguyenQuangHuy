@@ -50,7 +50,7 @@ P-015 is a B2B AI Fraud Investigation Copilot that assembles grounded evidence, 
 - grounding failure rate: 20% (1/5)
 - retry: NOT MEASURED in the source evaluator; the workbook retains an 8% retry planning estimate and labels it as such
 
-The five-case local evaluator is a reproducible control check, not customer evidence. The newer 30-sample conversational `fraud-agent-v2` benchmark is intentionally excluded from autonomous-containment measurement because it does not produce a completed investigation package or production disposition outcome.
+The five-case local evaluator is a reproducible control check, not customer evidence. The separate 30-sample conversational `FraudAgentEval-v1` dataset is intentionally excluded from autonomous-containment measurement because it does not produce a completed investigation package or production disposition outcome.
 
 ## Economics
 
@@ -110,6 +110,17 @@ Backend: Kafka `fraud_alerts` -> fraud engine/agent -> REST `/api/v1/fraud/analy
 - DOCX conversion note: a headless Office converter is unavailable in this environment; the PDF is a controlled reportlab export using the same one-page content, while the DOCX remains the editable source.
 - secret scan: PASS - no credential-pattern matches in project-authored files; `.env`, credential, secret and temporary Office/cache patterns are ignored; external repositories were not copied into this workspace.
 - git diff --check: PASS after final files are written.
+
+## Final Hardening Pass
+
+- Baseline verified before modification: `main`, clean working tree, HEAD `2cc30ba92dde21a956125de6988ac5ab1aedc559`.
+- Safety backup created at `backups/final_submission_20260827_101756/` before changes; backups remain ignored.
+- One final official-template search completed across the specified local roots and archive candidates; official Day28 files remain NOT FOUND and the limitation remains disclosed in `templates/SEARCH_LOG.md`.
+- Verified defect fixed: the OpenAI GPT-5.5 source URL was corrected to the direct first-party model page; the cached-input and batch price display was corrected to preserve decimal precision. No economic input or formula was changed.
+- Semantic audit scope covers the full workbook text, README, audit reports, recovery analysis, evidence, traceability/search-log files, scripts, DOCX and PDF. The audit also checks the completed-commercial-job denominator and the Case A formula boundary.
+- One-Pager stranger test: PASS. A first-time reader can identify the sold package, buyer/budget, billing unit, Cost/Job, price, unit/blended GM, package-completion threshold, separate autonomous containment, channel/affordability, Pain Moment, embedding, evidence and gaps without more than three clarifications.
+- Audit-of-audit: PASS. Source inspection confirms required conditions append failures and return non-zero; the missing-workbook negative invocation returned exit code 1; the final gate aggregates workbook, one-pager, numerical, semantic and required-artifact checks.
+- GitHub Actions: NOT CONFIGURED / NOT REQUIRED BY LAB. Local automated audits and committed QA evidence are the verification mechanism.
 
 ## Rubric
 

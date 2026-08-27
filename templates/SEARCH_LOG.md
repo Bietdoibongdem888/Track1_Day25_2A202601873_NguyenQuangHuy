@@ -14,4 +14,12 @@ Recovery re-search:
 
 Result: `BLOCKED - official Day28 files were not found locally after the recovery re-search; no matching candidate was returned.`
 
+Final hardening search on 2026-08-27:
+
+- Re-ran `rg --files` for exact Day28 filenames and variants under `D:\AI20K`, `D:\`, `C:\Users\Huy\Downloads`, `C:\Users\Huy\Desktop`, `C:\Users\Huy\Documents` and `C:\Users\Huy\.codex`.
+- Re-ran the archive filename scan for `.zip`, `.7z` and `.rar` candidates containing Day25/Day28, monetization, pricing, one-pager or template terms.
+- No official Day28 Excel or DOCX template was found. No authenticated VLearn browser/CDP session or credentials were accessed.
+
+Final result remains: `BLOCKED - official Day28 templates were not found locally.`
+
 Treatment: the final workbook uses the required Day25 tab names and a transparent formula-driven layout, but is explicitly labeled as an untemplated substitute. No claimed preservation of an official Day28 layout is made.

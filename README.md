@@ -54,6 +54,7 @@
 - Excel visual QA: seven rendered tabs inspected; PASS.
 - PDF visual QA: one-page Poppler render inspected; PASS.
 - Manual rubric audit: PARTIAL; official Day28 templates and customer pilot evidence were not found.
+- GitHub Actions: NOT CONFIGURED / NOT REQUIRED BY LAB. Local automated audits and visual inspection are the verification mechanism for this submission.
 
 ## Known limitations / assumptions
 

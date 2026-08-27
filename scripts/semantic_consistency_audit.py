@@ -45,11 +45,11 @@ def pdf_text(path: Path) -> str:
 
 def text_sources() -> dict[Path, str]:
     paths = [ROOT / "README.md", ROOT / "FINAL_AUDIT_REPORT.md", ROOT / "RECOVERY_GAP_ANALYSIS.md"]
-    paths.extend(sorted((ROOT / "evidence").glob("*.md")))
-    paths.extend(sorted((ROOT / "evidence").glob("*.csv")))
+    paths.extend(sorted((ROOT / "evidence").glob("*")))
+    paths.extend(sorted((ROOT / "templates").glob("*")))
     paths.extend(sorted((ROOT / "scripts").glob("*.py")))
     paths.extend(sorted((ROOT / "scripts").glob("*.mjs")))
-    paths = [p for p in paths if p.name != "semantic_consistency_audit.py"]
+    paths = [p for p in paths if p.is_file() and p.name != "semantic_consistency_audit.py"]
     return {p: p.read_text(encoding="utf-8", errors="ignore") for p in paths}
 
 
@@ -77,6 +77,12 @@ def main() -> int:
         "grounding failure": "20%",
         "breakeven package-completion rate": "44.3%",
     }
+    sheets = audit_workbook.read_book(WORKBOOK)
+    sources[WORKBOOK] = "\n".join(
+        str(cell.get("value") or "")
+        for sheet in sheets.values()
+        for cell in sheet.values()
+    )
     combined = "\n".join(sources.values()).lower()
     canonical_ok = True
     for phrase, expected in canonical.items():
@@ -86,7 +92,19 @@ def main() -> int:
     if not canonical_ok:
         failures.append("canonical-rates")
 
-    sheets = audit_workbook.read_book(WORKBOOK)
+    definition_ok = (
+        "one completed grounded investigation package" in combined
+        and "customer final disposition" in combined
+        and (
+            "human review and final disposition remain customer-owned workflow steps" in combined
+            or "authorized human owns the final disposition" in combined
+        )
+        and "autonomous completion" in combined
+    )
+    print(f"SEMANTIC CHECK - commercial job definition and human disposition boundary: {'PASS' if definition_ok else 'FAIL'}")
+    if not definition_ok:
+        failures.append("job-definition")
+
     c14 = float(audit_workbook.val(sheets, "2_Pricing", "C14") or 0)
     c16 = float(audit_workbook.val(sheets, "2_Pricing", "C16") or 0)
     c17 = float(audit_workbook.val(sheets, "2_Pricing", "C17") or 0)
@@ -109,6 +127,13 @@ def main() -> int:
     print(f"FORMULA CHECK - C14/C16/C17 values 80.0% / 44.3% / +35.7 pp: {'PASS' if values_ok else 'FAIL'}")
     if not formula_case_a or not values_ok:
         failures.append("formula-case-a")
+
+    cost_label = str(audit_workbook.val(sheets, "1_Cost_Job", "A61") or "").lower()
+    cost_formula = str(audit_workbook.formula(sheets, "1_Cost_Job", "C61") or "")
+    denominator_ok = "completed job" in cost_label and "c8" in cost_formula.lower()
+    print(f"FORMULA CHECK - Cost/Job uses completed-commercial-job denominator: {'PASS' if denominator_ok else 'FAIL'}")
+    if not denominator_ok:
+        failures.append("completed-denominator")
 
     with EVAL_CSV.open(newline="", encoding="utf-8") as handle:
         rows = list(csv.DictReader(handle))

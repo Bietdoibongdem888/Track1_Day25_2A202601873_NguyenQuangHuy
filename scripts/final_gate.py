@@ -22,16 +22,29 @@ def main() -> int:
         statuses.append(result.returncode == 0)
     required = [
         root / "deliverables" / "NguyenQuangHuy_Day25_model.xlsx",
+        root / "deliverables" / "NguyenQuangHuy_Day25_onepager.docx",
         root / "deliverables" / "NguyenQuangHuy_Day25_onepager.pdf",
+        root / "README.md",
+        root / "RECOVERY_GAP_ANALYSIS.md",
+        root / "SUBMISSION_MANIFEST.md",
         root / "evidence" / "product-selection.md",
         root / "evidence" / "eval-evidence.md",
+        root / "evidence" / "containment-eval.csv",
         root / "evidence" / "risk-evidence.md",
         root / "evidence" / "evidence-pack.md",
         root / "evidence" / "onepager-traceability.md",
+        root / "templates" / "SEARCH_LOG.md",
         root / "FINAL_AUDIT_REPORT.md",
     ]
+    required.extend(sorted((root / "evidence").glob("*.md")))
+    required.extend(sorted((root / "evidence").glob("*.csv")))
+    required.extend(sorted((root / "qa" / "workbook").glob("*.png")))
+    required.extend(sorted((root / "qa" / "onepager").glob("*.png")))
     artifacts_ok = all(p.exists() and p.stat().st_size > 0 for p in required)
     print(f"AUTOMATED CHECK - required final artifacts: {'PASS' if artifacts_ok else 'FAIL'}")
+    print(f"LOCAL AUTOMATED AUDITS: {'PASS' if all(statuses) else 'FAIL'}")
+    print(f"COMMITTED QA EVIDENCE: {'PRESENT' if artifacts_ok else 'MISSING'}")
+    print("GITHUB ACTIONS: NOT CONFIGURED / NOT REQUIRED BY LAB")
     print(f"MANUAL RUBRIC CHECK - official Day28 template: BLOCKED / disclosed")
     print(f"MANUAL RUBRIC CHECK - pilot evidence: MISSING EVIDENCE / plan supplied")
     print(f"VISUAL QA - Excel: inspect qa/workbook/*.png")

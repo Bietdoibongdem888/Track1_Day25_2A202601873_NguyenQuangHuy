@@ -235,7 +235,7 @@ s1.getRange('B65').formulas = [['=C61-C60']];
 s1.getRange('B66').formulas = [['=B65/C61']];
 inputs(s1, ['C6:C7','C9:C9','C11:C11','C13:C16','C21:C28','C33:C35','C40:C40','C43:C43','C45:C45','C50:C50']);
 formulas(s1, ['C8:C8','C10:C10','C12:C12','C17:C17','C29:C32','C36:C36','C41:C42','C44:C44','C46:C46','C51:C61','B64:B66']);
-countFmt(s1, 'C6:C6'); pctFmt(s1, 'C7:C7'); countFmt(s1, 'C8:C8'); pctFmt(s1, 'C9:C9'); pctFmt(s1, 'C11:C11'); countFmt(s1, 'C10:C10'); countFmt(s1, 'C12:C14'); moneyFmt(s1, 'C15:C16'); countFmt(s1, 'C23:C25'); moneyFmt(s1, 'C26:C28'); moneyFmt(s1, 'C29:C31'); pctFmt(s1, 'C32:C32'); moneyFmt(s1, 'C34:C35'); pctFmt(s1, 'C40:C40'); moneyFmt(s1, 'C41:C46'); moneyFmt(s1, 'C51:C61'); moneyFmt(s1, 'B64:B65'); pctFmt(s1, 'B66:B66');
+countFmt(s1, 'C6:C6'); pctFmt(s1, 'C7:C7'); countFmt(s1, 'C8:C8'); pctFmt(s1, 'C9:C9'); pctFmt(s1, 'C11:C11'); countFmt(s1, 'C10:C10'); countFmt(s1, 'C12:C14'); moneyFmt(s1, 'C15:C16'); countFmt(s1, 'C23:C25'); s1.getRange('C26:C28').format.numberFormat = '0.00;[Red](0.00);-'; moneyFmt(s1, 'C29:C31'); pctFmt(s1, 'C32:C32'); s1.getRange('C33:C34').format.numberFormat = '0.00;[Red](0.00);-'; moneyFmt(s1, 'C35:C35'); pctFmt(s1, 'C40:C40'); moneyFmt(s1, 'C41:C46'); moneyFmt(s1, 'C51:C61'); moneyFmt(s1, 'B64:B65'); pctFmt(s1, 'B66:B66');
 widths(s1, { A: 31, B: 22, C: 22, D: 18, E: 62 });
 s1.freezePanes.freezeRows(5);
 
@@ -467,7 +467,7 @@ s6.getRange('G5:G6').format = { font: { color: C.greenText, underline: true } };
 section(s6, 'A8:J8', 'Vendor pricing used in Cost/Job model');
 s6.getRange('A9:J13').values = [
   ['Vendor', 'Product/model', 'Input price', 'Cached input price', 'Output price', 'Batch price', 'Unit', 'Source', 'Date checked', 'Verification note'],
-  ['OpenAI', 'gpt-5.5 Standard short context', 5, 0.5, 30, 'Input $2.50 / Output $15.00', 'USD / 1M tokens', 'https://platform.openai.com/pricing?model=contentfilter-alpha-001', new Date('2026-08-27'), 'Current page lists gpt-5.5 standard input $5, cached input $0.50, output $30; batch input $2.50 and output $15.00.'],
+  ['OpenAI', 'gpt-5.5 Standard short context', 5, 0.5, 30, 'Input $2.50 / Output $15.00', 'USD / 1M tokens', 'https://developers.openai.com/api/docs/models/gpt-5.5', new Date('2026-08-27'), 'Current page lists gpt-5.5 standard input $5, cached input $0.50, output $30; batch input $2.50 and output $15.00.'],
   ['Supabase', 'Pro plan', 25, null, null, null, 'USD / month', 'https://supabase.com/pricing', new Date('2026-08-27'), 'Used only as a direct-infra anchor; model allocates additional app/compute/logging reserve.'],
   ['P-015 local eval', 'Deterministic fallback path', 0, 0, 0, 'N/A', 'local run', 'P-015/artifacts/agent/agent_metrics.json', new Date('2026-08-13'), '0 ms LLM latency is evidence that the local evaluator made no remote LLM call; not a production cost claim.'],
   ['Model-control rule', 'Optional LLM base case', null, null, null, 'Batch not in base', 'decision', 'P-015/docs/ai_fraud_agent.md', new Date('2026-08-27'), 'Use realtime standard pricing until latency and batch eligibility are measured.'],
@@ -494,7 +494,7 @@ s4.getRange('C23').conditionalFormats.add('cellIs', { operator: 'greaterThanOrEq
 
 // Make source comments auditable without crowding working tables.
 wb.comments.setSelf({ displayName: 'Nguyen Quang Huy' });
-wb.comments.addThread({ cell: s1.getRange('C26') }, 'Source: https://platform.openai.com/pricing?model=contentfilter-alpha-001 checked 2026-08-27. GPT-5.5 Standard short-context input price used in the base scenario.');
+wb.comments.addThread({ cell: s1.getRange('C26') }, 'Source: https://developers.openai.com/api/docs/models/gpt-5.5 checked 2026-08-27. GPT-5.5 Standard short-context input price used in the base scenario.');
 wb.comments.addThread({ cell: s1.getRange('C44') }, 'Source: https://supabase.com/pricing checked 2026-08-27. Pro plan is $25/month; additional app/compute/logging reserve is an explicit assumption.');
 wb.comments.addThread({ cell: s2.getRange('C16') }, 'Formula: solve for the commercial package-completion rate p in direct_cost / (price x attempts x p, with QA cost per completed package) <= 1 - GM_target. This is not an autonomous-containment threshold; local autonomous containment is 20%.');
 

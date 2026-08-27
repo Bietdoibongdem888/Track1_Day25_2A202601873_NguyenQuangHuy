@@ -10,7 +10,7 @@ Checked: **2026-08-27**. Prices are recorded as list/starting prices; no promoti
 - Cached input: **$0.50 / 1M tokens**.
 - Output: **$30.00 / 1M tokens**.
 - Batch scenario: **$2.50 / 1M input**, **$15.00 / 1M output**.
-- Source: https://platform.openai.com/pricing?model=contentfilter-alpha-001
+- Source: https://developers.openai.com/api/docs/models/gpt-5.5
 - Status: **VERIFIED LIST PRICE** on the date checked.
 
 Base arithmetic in `1_Cost_Job`:

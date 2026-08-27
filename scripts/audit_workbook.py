@@ -85,6 +85,19 @@ def main() -> int:
     if retry <= 0: failures.append("retry")
     if not hitl: failures.append("hitl")
     if completed <= 0: failures.append("denominator")
+    completed_label = str(val(sheets, "1_Cost_Job", "A8") or "").lower()
+    completed_formula = str(formula(sheets, "1_Cost_Job", "C8") or "")
+    cost_label = str(val(sheets, "1_Cost_Job", "A61") or "").lower()
+    cost_formula = str(formula(sheets, "1_Cost_Job", "C61") or "")
+    denominator_semantics_ok = (
+        "completed commercial jobs" in completed_label
+        and completed_formula.replace(" ", "").upper() == "C6*C7"
+        and "completed job" in cost_label
+        and "C8" in cost_formula.upper()
+    )
+    print(f"SEMANTIC CHECK - Cost/Job denominator is completed commercial jobs: {'PASS' if denominator_semantics_ok else 'FAIL'}")
+    if not denominator_semantics_ok:
+        failures.append("denominator-semantics")
     print(f"AUTOMATED CHECK - GM target and package-completion breakeven present: {'PASS' if val(sheets, '2_Pricing', 'C16') and val(sheets, '2_Pricing', 'C15') else 'FAIL'}")
     breakeven_label = str(val(sheets, "2_Pricing", "A16") or "")
     breakeven_formula = str(formula(sheets, "2_Pricing", "C16") or "")
@@ -100,7 +113,10 @@ def main() -> int:
     print(f"AUTOMATED CHECK - completion sensitivity table: {'PASS' if sensitivity else 'FAIL'}")
     if not sensitivity:
         failures.append("sensitivity")
-    print(f"AUTOMATED CHECK - benchmark dates present: {'PASS' if val(sheets, '6_Benchmarks', 'H5') and val(sheets, '6_Benchmarks', 'H6') else 'FAIL'}")
+    benchmark_dates_ok = bool(val(sheets, '6_Benchmarks', 'H5') and val(sheets, '6_Benchmarks', 'H6'))
+    print(f"AUTOMATED CHECK - benchmark dates present: {'PASS' if benchmark_dates_ok else 'FAIL'}")
+    if not benchmark_dates_ok:
+        failures.append("benchmark-dates")
     print(f"MANUAL RUBRIC CHECK - official template: BLOCKED / substitute disclosed")
     print(f"MANUAL RUBRIC CHECK - autonomous containment: 20% (1/5); package completion 80% (4/5) is separate")
     print(f"AUTOMATED AUDIT STATUS: {'PASS' if not failures else 'FAIL'}")
