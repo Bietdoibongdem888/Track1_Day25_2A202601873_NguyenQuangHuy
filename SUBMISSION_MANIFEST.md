@@ -2,65 +2,70 @@
 
 Student: Nguyen Quang Huy
 Student ID: 2A202601873
-Assignment: Day25 - AI Pricing, GTM and Evidence
+Assignment: Day25 — AI Pricing, GTM and Evidence
 Product: P-015 AI Fraud Investigation Copilot
 
 Repository: https://github.com/Bietdoibongdem888/Track1_Day25_2A202601873_NguyenQuangHuy
 
 ## Submit to LMS
 
-1. `NguyenQuangHuy_Day25_model.xlsx`
-2. `NguyenQuangHuy_Day25_onepager.pdf`
+1. NguyenQuangHuy_Day25_model.xlsx
+2. NguyenQuangHuy_Day25_onepager.pdf
 
-Supporting source: `NguyenQuangHuy_Day25_onepager.docx`
+Supporting source: NguyenQuangHuy_Day25_onepager.docx
+
+## Official source
+
+- Lab-linked Drive folder: https://drive.google.com/drive/folders/1piYuyvrVjlDj_oQ9AzHFJXwpC14-aiJa
+- Excel source: Day25-AI-Product-GTM-Monetization-Model.xlsx
+- DOCX source: Day25-AI-Product-GTM-One-Pager-Template.docx
+- Local immutable copies: templates/official/
+- Search/recovery record: templates/SEARCH_LOG.md
 
 ## Canonical metrics
 
-- Commercial package completion rate: 80% (4/5).
-- Autonomous containment rate: 20% (1/5).
-- Human-review/escalation rate: 80% (4/5).
-- Grounding failure rate: 20% (1/5).
-- Cost/Job: 7,648 VND per completed commercial job.
-- Usage price: 32,000 VND per completed grounded investigation package.
-- Base fee: 30,000,000 VND/month.
-- Breakeven package-completion rate: 44.3%; package-completion buffer: +35.7 percentage points.
-- Unit GM: 76.1%; blended GM: 82.8%.
-- Attribution: 2/5; Autonomy: 1/5; value metric: Hybrid.
+- Commercial package completion rate: 80.0% (4/5) local controlled eval.
+- Autonomous containment rate: 20.0% (1/5).
+- Human-review/escalation rate: 80.0% (4/5).
+- Grounding failure rate: 20.0% (1/5).
+- Cost/Job: $0.5422 per completed autonomous job (~₫14,150).
+- Price floor: $1.6267/job.
+- Proposed pure-usage price: $1.75/job.
+- GM: 69.0%.
+- Autonomous-containment breakeven: 15.5%; GM<50% threshold: about 12.4%.
+- Attribution: 2/10; Autonomy: 1/10; commercial recommendation: Hybrid.
+- ARPU: $1,050/month; ACV: $12,600/year.
+- CAC budget: $13,043.88; estimated CAC: $12,000; official estimated/budget ratio: 0.92x; inverse coverage: 1.09x.
+- Deals/AE/day: 0.180.
 
 ## Formula and commercial definition
 
-Case A is confirmed. `2_Pricing!C16` solves for the minimum commercial package-completion rate required by the usage-GM equation. It compares 80% commercial package completion with the 44.3% breakeven package-completion rate. The 20% autonomous containment result is not compared with that threshold.
+The official workbook uses 1_Cost_Job!B11 completed autonomous jobs as the Cost/Job denominator. One commercial job is a grounded investigation package with the required evidence and decision fields. Human review and customer final disposition remain separate workflow steps and are not represented as autonomous AI completion.
 
-One completed commercial job is one completed grounded investigation package with the required evidence and decision fields. The 32,000 VND variable charge is tied to that package boundary. Human review and customer final disposition remain separate workflow steps and are not represented as autonomous AI completion. Outcome pricing is not claimed.
+The 80.0% package-completion result is explicitly separate from the 20.0% autonomous-containment result. Outcome pricing is not claimed. Hybrid is the commercial recommendation; the official pricing tab models the pure usage leg for auditable economics.
 
 ## Evidence status
 
 - Five-case result: small local controlled evidence, not customer evidence.
 - Pilot: planned, not executed; no customer or participant is fabricated.
 - Risk/procurement: partial, with open production controls and dated owners/actions.
-- Official Day28 templates: not found after the documented local search; substitute layout disclosed in `templates/SEARCH_LOG.md`.
-- GitHub Actions: NOT CONFIGURED / NOT REQUIRED BY LAB. Local automated audits and visual inspection are the verification mechanism.
-
-## GTM
-
-- Channel: Sales-Led only for the first 90 days.
-- ARPU: 106,800,000 VND/month; ACV: 1,281,600,000 VND/year; USD reference: $49.3K at 26,000 VND/USD.
-- CAC budget: 1,061,327,040 VND/customer; estimated CAC: 350,000,000 VND/customer; affordability ratio: 3.03x.
+- Stranger test: not yet tested; target is no more than three clarification questions.
+- GitHub Actions: NOT CONFIGURED / NOT REQUIRED BY LAB; local automated audits and visual inspection are the verification mechanism.
 
 ## Verification record
 
-- Workbook formula audit: PASS.
+- Workbook formula/style/layout audit: PASS.
+- Formula preservation report: PASS; six documented official formula repairs and zero unauthorized mutations.
 - Numerical crosscheck: PASS.
 - Semantic consistency audit: PASS.
 - All seven Excel sheets rendered and inspected: PASS.
 - One-page PDF rendered and visually inspected: PASS.
-- DOCX structure audit and PDF page-count audit: PASS.
+- DOCX official-topology audit: PASS.
 - Secret scan: PASS.
-- `git diff --check`: PASS.
-- Audit scripts reject the missing-workbook negative case: PASS.
+- git diff --check: PASS.
 
-Final commit SHA: 02100475e40d367845c819cc72e4e1e723aaa3f2 (hardening commit)
-Final remote HEAD: verified after push; see final certification
+Final commit SHA: recorded after final verification
+Final remote HEAD: recorded after final push verification
 
 ## Submission decision
 

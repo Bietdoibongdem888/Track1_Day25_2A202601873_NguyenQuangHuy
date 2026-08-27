@@ -1,35 +1,39 @@
 # One-Pager traceability
 
-Every numeric claim in the editable DOCX and final PDF maps to a workbook cell or a named P-015 evidence artifact. `EVAL` claims are local controlled-evaluation results, not customer results.
+Every numeric claim in the editable DOCX and final PDF maps to an official workbook cell or a named P-015 evidence artifact. The 80.0% package-completion result is not the 20.0% autonomous-containment result.
 
-| One-Pager claim | Workbook tab | Workbook cell | Source assumption/evidence | Verification status |
-|---|---|---|---|---|
-| 2,400 completed packages/month | `1_Cost_Job` | `C8` | 3,000 attempts x 80% controlled grounded-package completion proxy | VERIFIED FORMULA; local-eval driver, not production |
-| Cost/Job 7,648 VND | `1_Cost_Job` | `C61` | Total direct cost / completed packages | VERIFIED FORMULA |
-| Price floor 22,945 VND | `2_Pricing` | `C9` | 3 x Cost/Job | VERIFIED FORMULA |
-| Platform fee 30M VND/month | `2_Pricing` | `C6` | Hybrid pricing decision; workflow/integration/governance access | ASSUMPTION / DECISION |
-| Usage price 32,000 VND/job | `2_Pricing` | `C7` | Proposed price decision | DECISION / NOT MARKET-VERIFIED |
-| Variable / usage GM 76.1% | `2_Pricing` | `C11` | (Usage price - Cost/Job) / usage price | VERIFIED FORMULA |
-| Blended GM 82.8% | `2_Pricing` | `C12` | (ARPU - monthly direct cost) / ARPU | VERIFIED FORMULA |
-| Commercial package completion rate 80% | `2_Pricing` | `C14` | 4/5 grounded packages in `containment-eval.md` | LOCAL CONTROLLED EVAL; not autonomous containment or customer evidence |
-| Autonomous containment rate 20% | N/A | N/A | `containment-eval.md`: 1/5 completed without required human intervention | VERIFIED LOCAL EVAL |
-| Human-review/escalation rate 80% | N/A | N/A | `containment-eval.csv` | VERIFIED LOCAL EVAL |
-| Grounding failure rate 20% | N/A | N/A | `containment-eval.csv`: missing/malformed ML score | VERIFIED LOCAL EVAL |
-| Breakeven package-completion rate 44.3% | `2_Pricing` | `C16` | Algebraic GM >=60% threshold for commercial package completion | VERIFIED FORMULA; not autonomous-containment threshold |
-| 40% package-completion GM 56.1% | `2_Pricing` | `C19` | 2x adverse package-completion error scenario | VERIFIED FORMULA |
-| Hybrid value metric | `3_Value_Metric` | `B12` | Attribution 2/5, Autonomy 1/5, matrix rule | VERIFIED DECISION |
-| Attribution 2/5 and Autonomy 1/5 | `3_Value_Metric` | `B13:C14` | P-015 local evaluation and human-review architecture | VERIFIED CURRENT STATE |
-| Sales-Led channel | `4_Channel_Fit` | `C6` | One-channel decision | VERIFIED DECISION |
-| Monthly ARPU 106.8M VND | `4_Channel_Fit` | `C8` | Hybrid fee + 2,400 completed packages x usage price | VERIFIED FORMULA |
-| ACV 1.282B VND / $49.3K reference | `4_Channel_Fit` | `C12`, `C25` | Monthly ARPU x 12; VND divided by 26,000 planning FX | VERIFIED FORMULA; USD is reference only |
-| CAC budget 1,061M VND | `4_Channel_Fit` | `C11` | ARPU x GM x 12-month payback | VERIFIED FORMULA |
-| Estimated CAC 350M VND | `4_Channel_Fit` | `C23` | AE cost, 12 opps/year, 25% win rate, onboarding allocation | VERIFIED FORMULA; planning assumptions |
-| Affordability gap 711M VND | `4_Channel_Fit` | `C24` | CAC budget - estimated CAC | VERIFIED FORMULA |
-| Affordability ratio 3.03x | `4_Channel_Fit` | `C26` | CAC budget / estimated CAC | VERIFIED FORMULA |
-| Deals / AE 2.81/year and 0.013/day | `4_Channel_Fit` | `C14`, `C16` | Quota / ACV / 220 working days | VERIFIED FORMULA; planning assumptions |
-| 15-minute labor anchor and 31,250 VND capture | `2_Pricing` | `C25:C29` | Labor rate 250,000 VND/hour, 50% capture | VERIFIED FORMULA; pilot validation required |
-| Stripe Radar benchmark | `6_Benchmarks` | `A5:J5` | First-party pricing page checked 2026-08-27 | VERIFIED SOURCE |
-| Fingerprint benchmark | `6_Benchmarks` | `A6:J6` | First-party pricing page checked 2026-08-27 | VERIFIED SOURCE |
-| Eval Results status | N/A | N/A | `evidence/eval-evidence.md`, `containment-eval.*` and P-015 artifacts | VERIFIED LOCAL EVIDENCE / PARTIAL |
-| Risk Checklist status | N/A | N/A | `evidence/risk-evidence.md` | VERIFIED STATUS / PARTIAL |
-| Pilot Report status | N/A | N/A | `evidence/evidence-pack.md` | MISSING EVIDENCE; dated plan provided |
+| One-Pager claim | Official workbook tab/cell | Source assumption/evidence | Verification status |
+|---|---|---|---|
+| Cost/Job $0.5422/job (~₫14,150) | 1_Cost_Job!B66; VND B69 | Completed autonomous-job cost; FX B68 | VERIFIED FORMULA |
+| Price floor $1.6267/job | 2_Pricing!B7 | 3x Cost/Job | VERIFIED FORMULA |
+| Proposed price $1.75/job | 2_Pricing!B19 | Planning decision; not a customer quote | DECISION / ASSUMPTION |
+| GM 69.0% | 2_Pricing!B21 | (price - Cost/Job) / price | VERIFIED FORMULA |
+| Breakeven autonomous containment 15.5% | 2_Pricing!B33 | Official usage-case breakeven; not package completion | VERIFIED FORMULA |
+| Current autonomous containment 20.0% | 1_Cost_Job!B10 | 1/5 local controlled evaluation | VERIFIED LOCAL EVAL |
+| Autonomous jobs/month 600 | 1_Cost_Job!B11 | 3,000 attempts x 20% autonomous containment | VERIFIED FORMULA / planning volume |
+| Package-completion/non-autonomous jobs 2,400 | 1_Cost_Job!B12 | 3,000 attempts minus 600 autonomous jobs | VERIFIED FORMULA |
+| Commercial package completion 80.0% | N/A | evidence/containment-eval.md: 4/5 grounded packages | LOCAL CONTROLLED EVAL; not autonomous containment or customer evidence |
+| Human-review/escalation 80.0% | N/A | evidence/containment-eval.csv: 4/5 | VERIFIED LOCAL EVAL |
+| Grounding failure 20.0% | N/A | evidence/containment-eval.csv: 1/5 | VERIFIED LOCAL EVAL |
+| Attribution 2/10 | 3_Value_Metric!B10 | Scorecard | VERIFIED DECISION |
+| Autonomy 1/10 | 3_Value_Metric!B18 | Scorecard | VERIFIED DECISION |
+| Value metric Hybrid | 3_Value_Metric!B30 | Decision note and evidence boundary | VERIFIED DECISION |
+| Benchmark rows | 3_Value_Metric!A26:D27 | Intercom Fin and Zendesk AI agents; checked 2026-08-27 | VERIFIED SOURCE |
+| ARPU $1,050/month | 4_Channel_Fit!B5 | $1.75 x 600 completed autonomous jobs/month | VERIFIED FORMULA / pure-usage scenario |
+| GM used in channel math 69.0% | 4_Channel_Fit!B6 | Cross-sheet reference to 2_Pricing!B21 | VERIFIED FORMULA |
+| CAC budget $13,043.88/customer | 4_Channel_Fit!B9 | Official Channel Fit formula | VERIFIED FORMULA |
+| ACV $12,600/year | 4_Channel_Fit!B10 | ARPU x 12 | VERIFIED FORMULA |
+| Deals/AE/year 39.68 | 4_Channel_Fit!B15 | Quota / ACV | VERIFIED FORMULA / planning assumption |
+| Deals/AE/day 0.180 | 4_Channel_Fit!B16 | Deals/year / 220 working days | VERIFIED FORMULA / planning assumption |
+| Cost/opportunity $3,000 | 4_Channel_Fit!B20 | Founder-led planning input; not CRM measurement | ASSUMPTION |
+| Win rate 25% | 4_Channel_Fit!B21 | Founder-led planning input | ASSUMPTION |
+| Estimated CAC $12,000/customer | 4_Channel_Fit!B22 | Cost/opportunity / win rate | VERIFIED FORMULA / planning assumption |
+| Estimated/budget 0.92x | 4_Channel_Fit!B23 | Estimated CAC / CAC budget | VERIFIED FORMULA |
+| Budget coverage 1.09x | Derived B9 / B22 | Inverse of official B23 | DERIVED |
+| 90-day plan | 5_90Day_Plan!B12:D18 | Channels, targets, activities, evidence, KPIs, owners | VERIFIED OFFICIAL TEMPLATE |
+| Eval/Risk/Pilot status | 5_90Day_Plan!B23:D25 | Status, evidence/gap, owner/deadline | VERIFIED OFFICIAL TEMPLATE |
+| Stranger-test limitation | 5_90Day_Plan!B32 | NOT YET TESTED; target <=3 questions | HONEST LIMITATION |
+
+## Boundary note
+
+A completed commercial package is a grounded investigation package with required evidence and decision fields. Human review and final disposition remain customer-owned. The official usage economics use autonomous jobs as the denominator, so package completion and autonomous containment are never silently substituted for one another.

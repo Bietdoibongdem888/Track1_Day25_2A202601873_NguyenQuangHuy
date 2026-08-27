@@ -1,0 +1,867 @@
+{
+  "name": "6_Benchmarks",
+  "values": [
+    [
+      "TAB 6 — BENCHMARKS (CHỈ ĐỌC)",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      "Giá chốt ngày 26/08/2026. Dòng có ⏳ là GIÁ KHUYẾN MẠI CÓ HẠN — phải kiểm tra lại.",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      "NGÀY BẠN KIỂM TRA LẠI GIÁ",
+      null,
+      null,
+      "Bắt buộc điền — Rubric có chấm mục này",
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      "Nhóm",
+      "Mục",
+      "Giá",
+      "Đơn vị",
+      "Nguồn",
+      null,
+      null,
+      null
+    ],
+    [
+      "LLM",
+      "Claude Opus 5 — input / output",
+      "5,00 / 25,00",
+      "$ / 1M token",
+      "platform.claude.com/docs/en/about-claude/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "LLM",
+      "Claude Sonnet 5 — input / output",
+      "2,00 / 10,00",
+      "$ / 1M token",
+      "platform.claude.com/docs/en/about-claude/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "LLM",
+      "Claude Haiku 4.5 — input / output",
+      "1,00 / 5,00",
+      "$ / 1M token",
+      "platform.claude.com/docs/en/about-claude/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "LLM",
+      "Claude — cache write 5' / cache read",
+      "1,25× / 0,10× input",
+      "hệ số",
+      "platform.claude.com/docs/en/about-claude/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "LLM",
+      "⏳ OpenAI GPT-5.6 Sol — input / output",
+      "4,00 / 20,00",
+      "$ / 1M token",
+      "developers.openai.com/api/docs/pricing (KM 21/08–21/11/2026; list 5,00/30,00)",
+      null,
+      null,
+      null
+    ],
+    [
+      "LLM",
+      "OpenAI GPT-5.6 Luna — input / output",
+      "0,20 / 1,20",
+      "$ / 1M token",
+      "developers.openai.com/api/docs/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "LLM",
+      "OpenAI — cached input / Batch API",
+      "10% input / −50%",
+      "hệ số",
+      "developers.openai.com/api/docs/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "LLM",
+      "Gemini 3.1 Pro — input / output (≤200k)",
+      "2,00 / 12,00",
+      "$ / 1M token",
+      "ai.google.dev/gemini-api/docs/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "LLM",
+      "⏳ Gemini 3.7 Flash — input / output",
+      "0,75 / 3,75",
+      "$ / 1M token",
+      "ai.google.dev/gemini-api/docs/pricing (KM đến 31/12/2026; sau đó 1,50/7,50)",
+      null,
+      null,
+      null
+    ],
+    [
+      "STT",
+      "Deepgram Nova-3 — pre-recorded",
+      "0,0043",
+      "$ / phút",
+      "deepgram.com/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "STT",
+      "⏳ Deepgram Nova-3 — streaming",
+      "list 0,0077 · KM 0,0048",
+      "$ / phút",
+      "deepgram.com/pricing — đang khuyến mại, kiểm tra lại",
+      null,
+      null,
+      null
+    ],
+    [
+      "STT",
+      "AssemblyAI Universal-2 — async",
+      "0,0025",
+      "$ / phút",
+      "assemblyai.com/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "STT",
+      "OpenAI gpt-4o-mini-transcribe",
+      "0,0030",
+      "$ / phút",
+      "developers.openai.com/api/docs/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "TTS",
+      "Google Cloud TTS — Standard",
+      "4,00",
+      "$ / 1M ký tự",
+      "cloud.google.com/text-to-speech/pricing (rẻ nhất)",
+      null,
+      null,
+      null
+    ],
+    [
+      "TTS",
+      "OpenAI tts-1",
+      "15,00",
+      "$ / 1M ký tự",
+      "developers.openai.com/api/docs/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "TTS",
+      "ElevenLabs Flash / Turbo",
+      "50,00",
+      "$ / 1M ký tự",
+      "elevenlabs.io/pricing/api",
+      null,
+      null,
+      null
+    ],
+    [
+      "TTS",
+      "ElevenLabs v3 / v2 Multilingual",
+      "100,00",
+      "$ / 1M ký tự",
+      "elevenlabs.io/pricing/api",
+      null,
+      null,
+      null
+    ],
+    [
+      "Quy đổi",
+      "Tốc độ nói",
+      "≈ 900",
+      "ký tự / phút",
+      "≈150 từ/phút — dùng để đổi phút ↔ ký tự",
+      null,
+      null,
+      null
+    ],
+    [
+      "Lưu ý",
+      "Google TTS — ký tự CJK",
+      "tính là 1 ký tự",
+      "—",
+      "cloud.google.com/text-to-speech/pricing (KHÔNG phải ×2)",
+      null,
+      null,
+      null
+    ],
+    [
+      "Lưu ý",
+      "Google STT — tính theo kênh",
+      "4 kênh × 120s = 480s",
+      "—",
+      "cloud.google.com/speech-to-text/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "Lưu ý",
+      "Streaming vs async STT",
+      "1× đến ~5×",
+      "hệ số",
+      "Tuỳ nhà cung cấp — AssemblyAI 1,0× · Google ~5×. Đừng dùng hệ số chung",
+      null,
+      null,
+      null
+    ],
+    [
+      "Sản phẩm",
+      "Intercom Fin — resolution",
+      "0,99",
+      "$ / outcome",
+      "fin.ai/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "Sản phẩm",
+      "Intercom Fin — qualification (sales)",
+      "9,99",
+      "$ / outcome",
+      "fin.ai/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "Sản phẩm",
+      "Zendesk — automated resolution",
+      "1,50",
+      "$ / resolution",
+      "zendesk.com/blog/ai/agentic-ai/outcome-based-pricing/ (blog, không trên trang giá)",
+      null,
+      null,
+      null
+    ],
+    [
+      "Sản phẩm",
+      "Salesforce Agentforce — Flex Credit",
+      "0,005 (action = 0,10)",
+      "$ / credit",
+      "salesforce.com/agentforce/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "Sản phẩm",
+      "Salesforce Agentforce — conversation",
+      "2,00",
+      "$ / conversation",
+      "salesforce.com/agentforce/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "Sản phẩm",
+      "GitHub Copilot — AI Credit",
+      "0,01",
+      "$ / credit",
+      "docs.github.com/en/copilot/get-started/plans",
+      null,
+      null,
+      null
+    ],
+    [
+      "Sản phẩm",
+      "GitHub Copilot Business / Enterprise",
+      "19 / 39",
+      "$ / seat / tháng",
+      "docs.github.com/en/copilot/get-started/plans",
+      null,
+      null,
+      null
+    ],
+    [
+      "Sản phẩm",
+      "Notion — Business / credits",
+      "20 / 10 per 1.000",
+      "$ / member / tháng",
+      "notion.com/pricing",
+      null,
+      null,
+      null
+    ],
+    [
+      "Benchmark",
+      "Gross Margin AI-native 2026E",
+      "≈ 53%",
+      "%",
+      "ICONIQ, 2026 State of AI: The Builder's Economy (07/2026)",
+      null,
+      null,
+      null
+    ],
+    [
+      "Benchmark",
+      "Gross Margin cloud (middle 50%)",
+      "60 – 80%",
+      "%",
+      "Bessemer, Scaling to $100 Million (2024)",
+      null,
+      null,
+      null
+    ],
+    [
+      "Benchmark",
+      "Vertical AI — GM / model cost",
+      "≈65% / ≈10% doanh thu",
+      "%",
+      "Bessemer, State of the Cloud 2024",
+      null,
+      null,
+      null
+    ],
+    [
+      "Benchmark",
+      "CAC payback SMB / Mid / Enterprise",
+      "12 / 18 / 24",
+      "tháng",
+      "Bessemer, Scaling to $100 Million (2024)",
+      null,
+      null,
+      null
+    ],
+    [
+      "Benchmark",
+      "LTV : CAC",
+      "≥ 3×",
+      "lần",
+      "David Skok, SaaS Metrics 2.0 (cập nhật 06/2026)",
+      null,
+      null,
+      null
+    ],
+    [
+      "Benchmark",
+      "Cost per opportunity 2026 (theo phân khúc)",
+      "6.300 · 8.000 · 11.200",
+      "$",
+      "ICONIQ, State of GTM 2026 (tr.22)",
+      null,
+      null,
+      null
+    ],
+    [
+      "Benchmark",
+      "ACV sàn cho inside sales",
+      "≈ 3.000",
+      "$ / năm",
+      "Tomasz Tunguz (2016) — có kèm giả định để tính lại",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      "Lưu ý: trang marketing của nhà cung cấp có thể hiển thị giá cũ hơn trang docs. Ưu tiên trang docs / pricing chính thức.",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  ],
+  "formulas": [
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  ]
+}

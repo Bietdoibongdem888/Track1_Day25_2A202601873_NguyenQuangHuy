@@ -1,34 +1,51 @@
 # Day25 recovery gap analysis
 
-Baseline: first-pass self-audit **87/100**. This recovery pass targets the 13 points previously withheld; it does not convert missing customer or production evidence into completed evidence.
+This migration supersedes the earlier untemplated substitute pass. It recovers the official Lab-linked Excel and DOCX templates while keeping missing customer and production evidence explicitly labeled.
 
-| Criterion / point group | Baseline self-audit | Maximum | Reason for deduction | Evidence needed to recover point | Can it be recovered now? | Action | Result |
-|---|---:|---:|---|---|---|---|---|
-| Cost/Job — point 29 | 28/30 | 30 | The 80% package-completion result was previously described as containment rather than as a separate commercial completion metric. | Directly relevant local E2E cases with attempted, grounded package, escalation and failure fields. | YES | Derived five-case local control eval from P-015's existing deterministic E2E report. | RECOVERED: commercial package completion 4/5 (80%); autonomous containment 1/5 (20%); human-review/escalation 4/5 (80%); grounding failure 1/5 (20%). |
-| Cost/Job — point 30 | 28/30 | 30 | The prior model needed a clearer unit/blended GM distinction and explicit sensitivity/price bridge. | Unit GM, blended GM, base-fee rationale, price/floor bridge and 50–90% sensitivity. | YES | Added usage GM, blended GM, value-created anchor audit, base-fee rationale and sensitivity table. | RECOVERED: all required model mechanics are visible and formula-driven. |
-| Value Metric — point 23 | 22/25 | 25 | The prior note did not explicitly reject Outcome and explain why current autonomy/attribution constrain it. | Three-sentence evidence-based Decision Note. | YES | Rewrote the exact three-sentence note with 2/5 Attribution and 1/5 Autonomy evidence. | RECOVERED. |
-| Value Metric — point 24 | 22/25 | 25 | Seat, pure Usage and Hybrid trade-offs were not all explicit; base fee role was under-specified. | Clear distinction between account-level base fee and completed-package variable charge. | YES | Added base-fee purchase, variable unit, predictability and double-charge logic to workbook/memo. | RECOVERED. |
-| Value Metric — point 25 | 22/25 | 25 | Benchmarks were adjacent but their similarity/difference was not explicit enough. | Current first-party prices, billing units, dates and similarity caveats. | YES | Rechecked Stripe Radar/Fingerprint pages and clarified both are usage-like fraud/risk anchors, not P-015 equivalents. | RECOVERED. |
-| Channel — point 18 | 17/20 | 20 | ACV lacked a documented USD reference and affordability was only a VND gap. | ACV in VND/USD and affordability ratio. | YES | Added ACV USD reference using documented 26,000 VND/USD planning FX and 3.03x ratio. | RECOVERED. |
-| Channel — point 19 | 17/20 | 20 | CAC estimate lacked a sufficiently explicit cost-per-opportunity bridge and source/date context. | Cost/opportunity, win rate, estimated CAC, source/date and assumptions. | YES | Added 50M VND/opportunity, 25% win rate, 350M CAC and 2026-08-27 planning-assumption context. | RECOVERED. |
-| Channel — point 20 | 17/20 | 20 | Deals/day and customer-facing distribution surface were not prominent enough. | Deals/AE/year/day plus exact customer-facing workflow surface. | YES | Added 2.81/year, 0.013/day, user-facing alert queue/dashboard and separate backend integration. | RECOVERED. |
-| Pain Moment / 90-Day — point 14 | 13/15 | 15 | Pain Moment named a time window but did not fully name actor, task and customer-facing app/surface. | Time/context + actor action + exact application surface. | YES | Rewrote the Pain Moment around a fraud analyst triaging the existing fraud-operations alert investigation queue/dashboard. | RECOVERED. |
-| Pain Moment / 90-Day — point 15 | 13/15 | 15 | Integration path was partly architecture and the execution plan lacked a direct surface link. | Backend/user-facing separation and measurable phase gates. | YES | Separated Kafka/backend flow from embedded queue/dashboard and retained owner, deadlines, metrics and evidence outputs for all phases. | RECOVERED. |
-| Evidence Pack — point 8 | 7/10 | 10 | Eval Results lacked a complete status block and case-level job record. | Status, existing evidence, source, gap, owner, deadline, criterion and case-level CSV. | YES | Added `containment-eval.md`, `containment-eval.csv`, reproducible builder and complete Eval status block with separate package-completion and autonomous-containment rates. | RECOVERED. |
-| Evidence Pack — point 9 | 7/10 | 10 | Risk gaps were listed but procurement answers did not consistently use verified/partial/not-verified states with next actions. | Ten-question procurement table with evidence, action and deadline. | YES | Rewrote `risk-evidence.md` and `evidence-pack.md` with explicit statuses and dated actions. | RECOVERED. |
-| Evidence Pack — point 10 | 7/10 | 10 | Pilot was honestly missing, but the protocol and completion criteria were not maximally explicit. | PLANNED / NOT YET EXECUTED protocol with profile, participants, dates, jobs, metrics, threshold, owner and report deadline. | YES | Added complete two-design-partner, 8-week, 6,000-job protocol and report deadline 2026-12-04. | RECOVERED as rubric-plan evidence; pilot remains unexecuted. |
+## Current recovery result
 
-## Recovery conclusion
+| Criterion | Current self-audit | Evidence |
+|---|---:|---|
+| Cost/Job | 30/30 | Official workbook uses completed autonomous-job denominator 1_Cost_Job!B11, retry/HITL economics, 3x floor, GM, breakeven and sensitivity. |
+| Value Metric | 25/25 | Official 3_Value_Metric tab records attribution 2/10, autonomy 1/10, Hybrid decision and adjacent benchmarks. |
+| Channel | 20/20 | Official 4_Channel_Fit tab records one Sales-Led channel and affordability math. |
+| Pain Moment / 90-Day | 15/15 | Official 5_90Day_Plan tab records actor, time window, surface, backend boundary, targets, KPIs, owners and evidence outputs. |
+| Evidence Pack | 10/10 | Official evidence block labels Eval/Risk/Pilot status, missing proof, owner and deadline. |
+| Total | 100/100 self-audit | Internally consistent and evidence-labeled; not a guaranteed instructor score. |
 
-- Recoverable rubric points: **13/13**.
-- New rubric self-audit: **100/100 supported by current artifacts**.
-- This is not a guarantee of instructor scoring.
-- Non-scoring/readiness limitations remain: official Day28 templates were not recovered; the controlled evaluation has only five relevant cases; customer pilot/time-saved evidence and production security/deployment evidence remain open.
-- These limitations are disclosed in the deliverables and do not get silently relabeled as verified customer evidence.
+## Official template migration
 
-## Semantic consistency patch
+Official sources recovered from the Lab-linked Drive folder on 2026-08-27:
 
-- Case selected: **A**. `2_Pricing!C16` solves the commercial package-completion rate required by the GM equation because completed commercial jobs are `attempted jobs x package-completion rate`; it does not solve autonomous containment.
-- Canonical local-eval rates: commercial package completion **80% (4/5)**; autonomous containment **20% (1/5)**; human-review/escalation **80% (4/5)**; grounding failure **20% (1/5)**.
-- Economic comparison: current package completion **80%** versus breakeven package-completion rate **44.3%**, buffer **+35.7 percentage points**. Autonomous containment **20%** is explicitly excluded from this threshold comparison.
-- Semantic/formula audit: **PASS** across workbook, DOCX/PDF source builders, README, final audit, gap analysis, evidence and traceability files.
+- Excel: Day25-AI-Product-GTM-Monetization-Model.xlsx
+- DOCX: Day25-AI-Product-GTM-One-Pager-Template.docx
+- Source folder: https://drive.google.com/drive/folders/1piYuyvrVjlDj_oQ9AzHFJXwpC14-aiJa
+- Immutable local copies: templates/official/
+- Migration scripts: scripts/migrate_official_workbook.mjs and scripts/migrate_official_onepager.py
+- Preservation report: qa/official_formula_preservation_report.md
+
+The supplied workbook's official seven-tab structure was retained. Its six unquoted cross-sheet references were objectively broken in the compatible evaluator; they were repaired only by quoting sheet names. The official source workbook remains unchanged. The DOCX retains the source's one-section/four-table topology and geometry. The source's internal header said DAY 28; the deliverable header is corrected to DAY 25 to match this assignment.
+
+## Containment boundary
+
+- One commercial job means one completed grounded investigation package with required evidence and decision fields.
+- Customer final disposition remains human-owned and is not silently relabeled as autonomous AI completion.
+- Local controlled evaluation: 5 attempted, 4/5 commercial package completion (80.0%), 1/5 autonomous containment (20.0%), 4/5 human review (80.0%), 1/5 grounding failure (20.0%).
+- The 80.0% package-completion metric is not the 20.0% autonomous-containment metric.
+
+## Economics and GTM
+
+- Cost/Job: $0.5422 per completed autonomous job; price floor $1.6267; planning price $1.75; GM 69.0%; autonomous-containment breakeven 15.5%.
+- Channel: Sales-Led only for the first 90 days; ARPU $1,050/month; CAC budget $13,043.88; estimated CAC $12,000; official estimated/budget ratio 0.92x; budget coverage 1.09x; deals/AE/day 0.180.
+- The $3,000/opportunity assumption is founder-led planning only and must be replaced with CRM funnel evidence after pilot.
+
+## Remaining non-recoverable readiness gaps
+
+- Pilot remains planned and unexecuted; no customer outcome, time-saved result or live deployment claim is made.
+- Retry telemetry, production security controls, retention/deletion, durable audit export, vendor terms, SLA and procurement certification evidence remain open.
+- Stranger test has prepared answers but is not yet independently run.
+- PDF was produced as a controlled ReportLab export because a headless office converter was unavailable; editable DOCX is the official-template-based source.
+
+## Final conclusion
+
+The current set is ready for an internally consistent LMS submission after automated gates, visual checks and repository verification pass. It is not a claim of production readiness or customer validation.

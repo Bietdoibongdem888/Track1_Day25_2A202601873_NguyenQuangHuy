@@ -40,4 +40,4 @@ P-015 has the strongest measurable evidence chain in the student's prior work: a
 - A reproducible small five-case LOCAL CONTROLLED EVAL supports commercial package completion of 80% (4/5) and autonomous containment of 20% (1/5); human-review/escalation is 80% (4/5), grounding failure is 20% (1/5), and production/customer autonomous containment remains unmeasured. See `evidence/containment-eval.md`.
 - No verified live Kafka -> ML -> Agent deployment or production telemetry.
 - Auth/RBAC, rate limiting, TLS, retention/deletion, vendor-processing terms, and a complete procurement package are not evidenced as implemented.
-- Official Day28 workbook and one-pager template were not found locally; see `templates/SEARCH_LOG.md`.
+- Official Excel and DOCX templates were recovered from the Lab-linked Drive and used for the final deliverables; see `templates/SEARCH_LOG.md`. The official source workbook's internal header says Day28, while this submission is Day25.

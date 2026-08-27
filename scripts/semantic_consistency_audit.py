@@ -1,4 +1,4 @@
-"""Semantic and formula audit for Day25 completion versus containment terminology."""
+"""Audit containment, package-completion, and human-disposition semantics."""
 from __future__ import annotations
 
 import csv
@@ -12,24 +12,16 @@ from pypdf import PdfReader
 
 import audit_workbook
 
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except AttributeError:
+    pass
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCX = ROOT / "deliverables" / "NguyenQuangHuy_Day25_onepager.docx"
 PDF = ROOT / "deliverables" / "NguyenQuangHuy_Day25_onepager.pdf"
 WORKBOOK = ROOT / "deliverables" / "NguyenQuangHuy_Day25_model.xlsx"
 EVAL_CSV = ROOT / "evidence" / "containment-eval.csv"
-
-BAD_LABELS = [
-    re.compile(r"commercial completion\s*/\s*containment", re.I),
-    re.compile(r"completion\s*/\s*containment", re.I),
-    re.compile(r"containment proxy", re.I),
-    re.compile(r"breakeven containment", re.I),
-    re.compile(r"required containment", re.I),
-    re.compile(r"containment error", re.I),
-    re.compile(r"current\s*/\s*evaluated containment", re.I),
-    re.compile(r"customer containment", re.I),
-    re.compile(r"production containment", re.I),
-]
 
 
 def docx_text(path: Path) -> str:
@@ -38,102 +30,63 @@ def docx_text(path: Path) -> str:
     return " ".join(html.unescape(x) for x in re.findall(r"<w:t[^>]*>(.*?)</w:t>", xml))
 
 
-def pdf_text(path: Path) -> str:
-    reader = PdfReader(str(path))
-    return "\n".join(page.extract_text() or "" for page in reader.pages)
-
-
-def text_sources() -> dict[Path, str]:
-    paths = [ROOT / "README.md", ROOT / "FINAL_AUDIT_REPORT.md", ROOT / "RECOVERY_GAP_ANALYSIS.md"]
-    paths.extend(sorted((ROOT / "evidence").glob("*")))
-    paths.extend(sorted((ROOT / "templates").glob("*")))
-    paths.extend(sorted((ROOT / "scripts").glob("*.py")))
-    paths.extend(sorted((ROOT / "scripts").glob("*.mjs")))
-    paths = [p for p in paths if p.is_file() and p.name != "semantic_consistency_audit.py"]
-    return {p: p.read_text(encoding="utf-8", errors="ignore") for p in paths}
-
-
 def main() -> int:
-    failures: list[str] = []
-    sources = text_sources()
-    sources[DOCX] = docx_text(DOCX)
-    sources[PDF] = pdf_text(PDF)
+    failures = []
+    source_paths = [ROOT / "README.md", ROOT / "FINAL_AUDIT_REPORT.md", ROOT / "RECOVERY_GAP_ANALYSIS.md", ROOT / "SUBMISSION_MANIFEST.md", ROOT / "templates" / "SEARCH_LOG.md"]
+    source_paths += sorted((ROOT / "evidence").glob("*.md")) + sorted((ROOT / "evidence").glob("*.csv"))
+    texts = {path: path.read_text(encoding="utf-8", errors="ignore") for path in source_paths if path.exists()}
+    texts[DOCX] = docx_text(DOCX)
+    texts[PDF] = "\n".join(page.extract_text() or "" for page in PdfReader(str(PDF)).pages)
+    sheets_for_text = audit_workbook.read_book(WORKBOOK)
+    texts[WORKBOOK] = "\n".join(str(cell.get("value") or "") for sheet in sheets_for_text.values() for cell in sheet.values())
+    combined = "\n".join(texts.values())
+    lower = combined.lower()
 
-    legacy_hits = []
-    for path, content in sources.items():
-        for pattern in BAD_LABELS:
-            if pattern.search(content):
-                legacy_hits.append(f"{path.name}: {pattern.pattern}")
-    print(f"SEMANTIC CHECK - forbidden legacy labels: {'PASS' if not legacy_hits else 'FAIL'}")
-    if legacy_hits:
-        failures.append("legacy-labels")
-        for hit in legacy_hits:
-            print(f"  {hit}")
+    bad_mislabels = [
+        r"(?:80(?:\.0)?%|4/5)\s+autonomous(?:\s+containment)?",
+        r"autonomous\s+(?:containment|completion)(?:\s+rate)?\s*(?:is|=|:)\s*80(?:\.0)?%",
+        r"20(?:\.0)?%\s+(?:commercial\s+)?package completion",
+        r"(?:commercial\s+)?package completion(?:\s+rate)?\s*(?:is|=|:)\s*20(?:\.0)?%",
+    ]
+    mislabels = [pattern for pattern in bad_mislabels if re.search(pattern, lower)]
+    print(f"SEMANTIC CHECK - no 80/20 containment mislabeling: {'PASS' if not mislabels else 'FAIL'}")
+    if mislabels:
+        failures.append("mislabeling")
 
     canonical = {
-        "commercial package completion": "80%",
-        "autonomous containment": "20%",
-        "human-review/escalation": "80%",
-        "grounding failure": "20%",
-        "breakeven package-completion rate": "44.3%",
+        "commercial package completion": "80.0%",
+        "autonomous containment": "20.0%",
+        "human-review / escalation": "80.0%",
+        "grounding failure": "20.0%",
     }
-    sheets = audit_workbook.read_book(WORKBOOK)
-    sources[WORKBOOK] = "\n".join(
-        str(cell.get("value") or "")
-        for sheet in sheets.values()
-        for cell in sheet.values()
-    )
-    combined = "\n".join(sources.values()).lower()
     canonical_ok = True
     for phrase, expected in canonical.items():
-        present = phrase in combined and expected.lower() in combined
-        print(f"SEMANTIC CHECK - {phrase}: {'PASS' if present else 'FAIL'} ({expected})")
-        canonical_ok = canonical_ok and present
+        ok = phrase in lower and expected.lower() in lower
+        print(f"SEMANTIC CHECK - {phrase}: {'PASS' if ok else 'FAIL'} ({expected})")
+        canonical_ok = canonical_ok and ok
     if not canonical_ok:
         failures.append("canonical-rates")
 
-    definition_ok = (
-        "one completed grounded investigation package" in combined
-        and "customer final disposition" in combined
-        and (
-            "human review and final disposition remain customer-owned workflow steps" in combined
-            or "authorized human owns the final disposition" in combined
-        )
-        and "autonomous completion" in combined
+    job_definition_ok = (
+        "one completed grounded investigation package" in lower
+        and "final disposition" in lower
+        and ("customer owns final disposition" in lower or "customer-owned" in lower or "customer final disposition remains" in lower)
+        and "autonomous completion" in lower
     )
-    print(f"SEMANTIC CHECK - commercial job definition and human disposition boundary: {'PASS' if definition_ok else 'FAIL'}")
-    if not definition_ok:
+    print(f"SEMANTIC CHECK - commercial job definition and human disposition boundary: {'PASS' if job_definition_ok else 'FAIL'}")
+    if not job_definition_ok:
         failures.append("job-definition")
 
-    c14 = float(audit_workbook.val(sheets, "2_Pricing", "C14") or 0)
-    c16 = float(audit_workbook.val(sheets, "2_Pricing", "C16") or 0)
-    c17 = float(audit_workbook.val(sheets, "2_Pricing", "C17") or 0)
-    c16_label = str(audit_workbook.val(sheets, "2_Pricing", "A16") or "")
-    c16_formula = str(audit_workbook.formula(sheets, "2_Pricing", "C16") or "")
-    formula_case_a = (
-        "package-completion" in c16_label.lower()
-        and "containment" not in c16_label.lower()
-        and "'1_Cost_Job'!C6" in c16_formula
-        and "'1_Cost_Job'!C29" in c16_formula
-        and "'1_Cost_Job'!C40" in c16_formula
-        and "'1_Cost_Job'!C43" in c16_formula
-        and "'1_Cost_Job'!C45" in c16_formula
-        and "C7" in c16_formula
-        and "C8" in c16_formula
-        and "C15" in c16_formula
-    )
-    values_ok = abs(c14 - 0.8) < 1e-9 and abs(c16 - 0.443176911976912) < 1e-9 and abs(c17 - (c14 - c16)) < 1e-9
-    print(f"FORMULA CHECK - C16 solves Case A package-completion rate: {'PASS' if formula_case_a else 'FAIL'}")
-    print(f"FORMULA CHECK - C14/C16/C17 values 80.0% / 44.3% / +35.7 pp: {'PASS' if values_ok else 'FAIL'}")
-    if not formula_case_a or not values_ok:
-        failures.append("formula-case-a")
-
-    cost_label = str(audit_workbook.val(sheets, "1_Cost_Job", "A61") or "").lower()
-    cost_formula = str(audit_workbook.formula(sheets, "1_Cost_Job", "C61") or "")
-    denominator_ok = "completed job" in cost_label and "c8" in cost_formula.lower()
-    print(f"FORMULA CHECK - Cost/Job uses completed-commercial-job denominator: {'PASS' if denominator_ok else 'FAIL'}")
-    if not denominator_ok:
-        failures.append("completed-denominator")
+    sheets = sheets_for_text
+    cost_formula = audit_workbook.formula(sheets, "1_Cost_Job", "B66") or ""
+    denominator_ok = "B11" in cost_formula and "B9" not in cost_formula
+    pricing_formula = audit_workbook.formula(sheets, "2_Pricing", "B33") or ""
+    pricing_label = str(audit_workbook.val(sheets, "2_Pricing", "A33") or "").lower()
+    economic_semantics_ok = "containment" in pricing_label and "B19" in pricing_formula and float(audit_workbook.val(sheets, "2_Pricing", "B33")) < float(audit_workbook.val(sheets, "1_Cost_Job", "B10"))
+    print(f"FORMULA CHECK - Cost/Job uses autonomous-job denominator B11: {'PASS' if denominator_ok else 'FAIL'}")
+    print(f"FORMULA CHECK - B33 is autonomous-containment breakeven, not package completion: {'PASS' if economic_semantics_ok else 'FAIL'}")
+    if not denominator_ok: failures.append("denominator")
+    if not economic_semantics_ok: failures.append("breakeven-semantics")
 
     with EVAL_CSV.open(newline="", encoding="utf-8") as handle:
         rows = list(csv.DictReader(handle))
@@ -151,6 +104,8 @@ def main() -> int:
         failures.append("eval-counts")
 
     print(f"SEMANTIC AUDIT STATUS: {'PASS' if not failures else 'FAIL'}")
+    if failures:
+        print("FAILURES: " + ", ".join(failures))
     return 0 if not failures else 1
 
 

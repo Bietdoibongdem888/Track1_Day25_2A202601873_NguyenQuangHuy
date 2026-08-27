@@ -1,25 +1,27 @@
-# Day25 template search log
+# Official Day25 template search and recovery log
 
-Searched on 2026-08-27:
+## Final status
 
-- `D:\AI20K` recursively for `day28_monetization_model.xlsx` and `day28_one_pager_template.docx`.
-- `C:\Users\Huy\Downloads`, `C:\Users\Huy\Documents`, `C:\Users\Huy\Desktop`, and `C:\P-015` for the same filenames.
-- Existing local Day21-Day24 repositories, including `D:\AI20K\Track1_Day24_2A202601873_NguyenQuangHuy` and `D:\AI20K\P-015`.
+**OFFICIAL TEMPLATES FOUND AND USED**
 
-Recovery re-search:
+Recovered on **2026-08-27** from the Lab-linked Google Drive folder:
 
-- `D:\` and `D:\AI20K` recursively for exact names and filename variants containing `monetization`, `one_pager`, `onepager`, `pricing`, `Day25`, or `Day28`, limited to spreadsheet/document/archive candidates.
-- `C:\Users\Huy\Downloads`, `C:\Users\Huy\Desktop`, `C:\Users\Huy\Documents`, and `C:\Users\Huy\.codex` recursively for the same exact names and variants.
-- Local P-015, prior-course repositories, browser-download locations, and candidate archive filenames; no authenticated browser/CDP session or credentials were accessed.
+- Folder: https://drive.google.com/drive/folders/1piYuyvrVjlDj_oQ9AzHFJXwpC14-aiJa
+- Excel source: Day25-AI-Product-GTM-Monetization-Model.xlsx
+- Excel Drive file ID: 1TjdiiUIuydkMAdJegThB1b5Vi2sG8rC2
+- DOCX source: Day25-AI-Product-GTM-One-Pager-Template.docx
+- DOCX Drive file ID: 18NLgYIxOrkdNvnZZW-mVhxrSjnabA3jx
+- Local immutable copies: templates/official/
+- Recovery date: 2026-08-27
 
-Result: `BLOCKED - official Day28 files were not found locally after the recovery re-search; no matching candidate was returned.`
+## Migration treatment
 
-Final hardening search on 2026-08-27:
+- The final workbook preserves the official seven tabs: 0_README, 1_Cost_Job, 2_Pricing, 3_Value_Metric, 4_Channel_Fit, 5_90Day_Plan and 6_Benchmarks.
+- Only yellow input cells were populated for the product case, plus the mandatory benchmark check date.
+- The supplied workbook contained six objectively broken unquoted cross-sheet formulas. The working copy repairs only those six references by quoting sheet names; the immutable source is untouched. See qa/official_formula_preservation_report.md.
+- The DOCX was filled from the official one-section/four-table structure. Its internal source heading said DAY 28; the deliverable corrects that header to DAY 25 for this assignment while preserving official layout.
+- The PDF is a one-page controlled export of the same official-template content. A headless office converter was unavailable; this is disclosed in the final audit.
 
-- Re-ran `rg --files` for exact Day28 filenames and variants under `D:\AI20K`, `D:\`, `C:\Users\Huy\Downloads`, `C:\Users\Huy\Desktop`, `C:\Users\Huy\Documents` and `C:\Users\Huy\.codex`.
-- Re-ran the archive filename scan for `.zip`, `.7z` and `.rar` candidates containing Day25/Day28, monetization, pricing, one-pager or template terms.
-- No official Day28 Excel or DOCX template was found. No authenticated VLearn browser/CDP session or credentials were accessed.
+## Historical search note
 
-Final result remains: `BLOCKED - official Day28 templates were not found locally.`
-
-Treatment: the final workbook uses the required Day25 tab names and a transparent formula-driven layout, but is explicitly labeled as an untemplated substitute. No claimed preservation of an official Day28 layout is made.
+Earlier local-only searches reported BLOCKED because the authenticated Drive source was not materialized locally. That historical result is superseded by the Drive recovery above. No credentials or private source material were copied into the repository.

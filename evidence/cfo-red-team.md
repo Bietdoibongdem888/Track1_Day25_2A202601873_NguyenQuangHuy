@@ -1,10 +1,11 @@
 # CFO red-team findings
 
-1. **Denominator:** corrected to completed grounded packages (`C8`), not attempts (`C6`). The incorrect attempted denominator understates Cost/Job by 20.0% in the base case.
-2. **Retry:** 8% is an explicit estimate and produces 730,080 VND/month; it is not silently zero.
-3. **HITL:** Variant A is explicit. Internal QA costs 3,000,000 VND/month; customer escalation labor is disclosed as 70,000,000 VND/month but excluded from our COGS because the customer owns escalation handling.
-4. **API math:** fresh input, cached input and output are separated; cache savings are 1,638 VND/attempt or 35.0%. Batch prices are scenario-only.
-5. **Infrastructure:** 4,000,000 VND/month is a conservative allocation with a Supabase Pro anchor and an explicit app/compute/logging reserve; not a measured production invoice.
-6. **GM:** blended GM is 82.8%, below the 85% missing-cost trigger. Usage GM is 76.1%. The five-case controlled eval produces commercial package completion of 80%, autonomous containment of 20%, human-review/escalation of 80% and grounding failure of 20%; a 2x adverse package-completion error to 40% lowers usage GM to 56.1%, so the model does not celebrate an artificially tiny cost.
-7. **Vendor/API data costs:** no paid external fraud-data API was found in the current P-015 evidence chain; this absence is not proof that a customer deployment will have none. The pilot must capture all paid APIs and data-access charges.
-8. **Unverified deployment:** live Kafka/ML/full-stack deployment is not claimed; infrastructure and observability remain partially unverified. The controlled eval is reproducible but remains local and synthetic, not a customer pilot.
+1. **Denominator:** the official Cost/Job output at 1_Cost_Job!B66 divides direct cost by B11 completed autonomous jobs, not by the 3,000 attempts. The 20% autonomy rate is therefore an explicit economic driver.
+2. **Containment semantics:** the local controlled eval reports 80.0% commercial package completion (4/5), 20.0% autonomous containment (1/5), 80.0% human review (4/5) and 20.0% grounding failure (1/5). These are not interchangeable.
+3. **Retry:** B46 retains an 8% planning estimate until retry telemetry is instrumented; the local evaluator reports retry rate NOT MEASURED.
+4. **HITL:** Variant A is explicit. Internal QA is included in vendor COGS; customer escalation and final disposition remain customer-owned.
+5. **API math:** the official workbook separates cached input, fresh input and output. Current OpenAI GPT-5.6 Sol pricing is documented in evidence/pricing-sources.md; the local deterministic evaluator did not incur paid tokens.
+6. **Infrastructure:** B41 allocates $0.005/attempt for retrieval, vector/embedding, storage, logging and runtime reserve. This is a planning assumption, not a production invoice.
+7. **GM and failure threshold:** at $1.75/job, Cost/Job is $0.5422 and GM is 69.0%. Autonomous-containment breakeven is 15.5%; GM falls below 50% at about 12.4% containment. Current 20.0% clears the official usage case, but customer evidence is missing.
+8. **GTM:** ARPU is $1,050/month, CAC budget $13,043.88, estimated CAC $12,000, official estimated/budget ratio 0.92x and inverse coverage 1.09x. The $3,000/opportunity input is founder-led planning only, not CRM evidence.
+9. **Unverified deployment:** live Kafka/ML/full-stack deployment, production security controls, retention/deletion, vendor terms and procurement evidence remain partial or open. No production claim is made.
