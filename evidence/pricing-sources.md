@@ -1,18 +1,20 @@
 # Current pricing verification
 
-Checked: **2026-08-27**. These are current public list/planning references; no promotional price is used in the base case.
+Checked: **2026-08-27**. The base case uses the current GPT-5.6 Sol promotional pricing, treated as a time-bounded planning input rather than a permanent list-price assumption.
 
 ## OpenAI API
 
-- Vendor/model: OpenAI GPT-5.6 Sol, Standard, short context.
-- Standard input: **$4.00 / 1M tokens**.
+- Vendor/model: OpenAI GPT-5.6 Sol, Standard processing, short context.
+- Input: **$4.00 / 1M tokens**.
 - Cached input: **$0.40 / 1M tokens**.
 - Cache writes: **$5.00 / 1M tokens**.
 - Output: **$20.00 / 1M tokens**.
 - Batch scenario: **$2.00 / 1M input**, **$0.20 / 1M cached input**, **$2.50 / 1M cache writes**, **$10.00 / 1M output**.
-- Promotional pricing is shown by the vendor as available at least through 2026-11-21; it is not used in this base case.
+- Pricing status: **current promotional rate**. OpenAI documents it as available at least through **2026-11-21**.
 - Source: https://developers.openai.com/api/docs/pricing
 - Status: **VERIFIED FIRST-PARTY PRICE PAGE** on the date checked.
+
+Because the current GPT-5.6 Sol rate is promotional, production pricing must be rechecked before contracting or after the promotion ends. A post-promotion/list-price scenario should be treated as pricing risk rather than assumed away. No future post-promotion price is assumed in this base case.
 
 Official workbook arithmetic uses 6 turns/job, 3,000 cached tokens/turn, 1,000 fresh tokens/turn and 300 output tokens/turn:
 

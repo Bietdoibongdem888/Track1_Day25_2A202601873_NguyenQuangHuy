@@ -22,6 +22,7 @@ DOCX = ROOT / "deliverables" / "NguyenQuangHuy_Day25_onepager.docx"
 PDF = ROOT / "deliverables" / "NguyenQuangHuy_Day25_onepager.pdf"
 WORKBOOK = ROOT / "deliverables" / "NguyenQuangHuy_Day25_model.xlsx"
 EVAL_CSV = ROOT / "evidence" / "containment-eval.csv"
+PRICING_EVIDENCE = ROOT / "evidence" / "pricing-sources.md"
 
 
 def docx_text(path: Path) -> str:
@@ -87,6 +88,43 @@ def main() -> int:
     print(f"FORMULA CHECK - B33 is autonomous-containment breakeven, not package completion: {'PASS' if economic_semantics_ok else 'FAIL'}")
     if not denominator_ok: failures.append("denominator")
     if not economic_semantics_ok: failures.append("breakeven-semantics")
+
+    pricing_text = texts.get(PRICING_EVIDENCE, "").lower()
+    known_promotional_bundle = all(
+        marker in pricing_text
+        for marker in (
+            "gpt-5.6 sol",
+            "$4.00 / 1m tokens",
+            "$0.40 / 1m tokens",
+            "$20.00 / 1m tokens",
+        )
+    )
+    if known_promotional_bundle:
+        promotional_label_ok = all(
+            marker in pricing_text
+            for marker in ("promotional", "time-bounded", "2026-11-21")
+        )
+        contradictory_patterns = (
+            r"\bno promotional price is used\b",
+            r"\bpromotional pricing\b.{0,120}\bnot used in (?:the )?base case\b",
+            r"\bcurrent list price\b",
+            r"\bstandard non-promotional price\b",
+            r"\b(?:base case|model|rate)\s+(?:uses|assumes|is)\s+(?:the )?permanent(?: list[- ])?price\b",
+        )
+        pricing_status_ok = promotional_label_ok and not any(
+            re.search(pattern, pricing_text) for pattern in contradictory_patterns
+        )
+        print(
+            "SEMANTIC CHECK - known GPT-5.6 Sol promotional rate is labeled time-bounded: "
+            f"{'PASS' if pricing_status_ok else 'FAIL'}"
+        )
+        if not pricing_status_ok:
+            failures.append("promotional-pricing-status")
+    else:
+        print(
+            "SEMANTIC CHECK - known GPT-5.6 Sol promotional rate is labeled time-bounded: "
+            "NOT APPLICABLE (current rate bundle not detected)"
+        )
 
     with EVAL_CSV.open(newline="", encoding="utf-8") as handle:
         rows = list(csv.DictReader(handle))
