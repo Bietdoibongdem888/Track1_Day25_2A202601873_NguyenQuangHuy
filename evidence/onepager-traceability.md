@@ -11,12 +11,12 @@ Every numeric claim in the editable DOCX and final PDF maps to a workbook cell o
 | Usage price 32,000 VND/job | `2_Pricing` | `C7` | Proposed price decision | DECISION / NOT MARKET-VERIFIED |
 | Variable / usage GM 76.1% | `2_Pricing` | `C11` | (Usage price - Cost/Job) / usage price | VERIFIED FORMULA |
 | Blended GM 82.8% | `2_Pricing` | `C12` | (ARPU - monthly direct cost) / ARPU | VERIFIED FORMULA |
-| Current package completion 80% | `2_Pricing` | `C14` | 4/5 grounded packages in `containment-eval.md` | LOCAL CONTROLLED EVAL; not customer containment |
-| Autonomous completion 20% | N/A | N/A | `containment-eval.md`: 1/5 completed without required human intervention | VERIFIED LOCAL EVAL |
-| Human-review cases 4/5 | N/A | N/A | `containment-eval.csv` | VERIFIED LOCAL EVAL |
-| Failed grounding cases 1/5 | N/A | N/A | `containment-eval.csv`: missing/malformed ML score | VERIFIED LOCAL EVAL |
-| Required containment 44.3% | `2_Pricing` | `C16` | Algebraic GM >=60% threshold | VERIFIED FORMULA |
-| 40% adverse completion GM 56.1% | `2_Pricing` | `C19` | 2x adverse error scenario | VERIFIED FORMULA |
+| Commercial package completion rate 80% | `2_Pricing` | `C14` | 4/5 grounded packages in `containment-eval.md` | LOCAL CONTROLLED EVAL; not autonomous containment or customer evidence |
+| Autonomous containment rate 20% | N/A | N/A | `containment-eval.md`: 1/5 completed without required human intervention | VERIFIED LOCAL EVAL |
+| Human-review/escalation rate 80% | N/A | N/A | `containment-eval.csv` | VERIFIED LOCAL EVAL |
+| Grounding failure rate 20% | N/A | N/A | `containment-eval.csv`: missing/malformed ML score | VERIFIED LOCAL EVAL |
+| Breakeven package-completion rate 44.3% | `2_Pricing` | `C16` | Algebraic GM >=60% threshold for commercial package completion | VERIFIED FORMULA; not autonomous-containment threshold |
+| 40% package-completion GM 56.1% | `2_Pricing` | `C19` | 2x adverse package-completion error scenario | VERIFIED FORMULA |
 | Hybrid value metric | `3_Value_Metric` | `B12` | Attribution 2/5, Autonomy 1/5, matrix rule | VERIFIED DECISION |
 | Attribution 2/5 and Autonomy 1/5 | `3_Value_Metric` | `B13:C14` | P-015 local evaluation and human-review architecture | VERIFIED CURRENT STATE |
 | Sales-Led channel | `4_Channel_Fit` | `C6` | One-channel decision | VERIFIED DECISION |

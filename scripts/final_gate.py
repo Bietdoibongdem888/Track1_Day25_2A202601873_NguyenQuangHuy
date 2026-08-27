@@ -12,6 +12,7 @@ def main() -> int:
         [sys.executable, str(root / "scripts" / "audit_workbook.py")],
         [sys.executable, str(root / "scripts" / "audit_onepager.py")],
         [sys.executable, str(root / "scripts" / "crosscheck_numbers.py")],
+        [sys.executable, str(root / "scripts" / "semantic_consistency_audit.py")],
     ]
     statuses = []
     for command in commands:

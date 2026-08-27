@@ -37,7 +37,7 @@ P-015 has the strongest measurable evidence chain in the student's prior work: a
 ## Missing evidence
 
 - No valid customer pilot, persisted customer disposition log or observed time-saved baseline was found.
-- A reproducible five-case LOCAL CONTROLLED EVAL now supports an 80% grounded-package completion proxy and 20% autonomous completion; production customer containment remains unmeasured. See `evidence/containment-eval.md`.
+- A reproducible small five-case LOCAL CONTROLLED EVAL supports commercial package completion of 80% (4/5) and autonomous containment of 20% (1/5); human-review/escalation is 80% (4/5), grounding failure is 20% (1/5), and production/customer autonomous containment remains unmeasured. See `evidence/containment-eval.md`.
 - No verified live Kafka -> ML -> Agent deployment or production telemetry.
 - Auth/RBAC, rate limiting, TLS, retention/deletion, vendor-processing terms, and a complete procurement package are not evidenced as implemented.
 - Official Day28 workbook and one-pager template were not found locally; see `templates/SEARCH_LOG.md`.

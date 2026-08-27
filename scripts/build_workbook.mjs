@@ -106,7 +106,7 @@ s0.getRange('A7:F13').values = [
   ['Formula outputs', 'Black text; cross-sheet links are green where useful for tracing.', '', '', '', ''],
   ['Source of truth', 'P-015 repo artifacts and docs; current first-party vendor pages checked 2026-08-27; labeled assumptions where measured data is absent.', '', '', '', ''],
   ['Primary decision', 'Hybrid value metric: monthly platform fee plus per completed investigation job.', '', '', '', ''],
-  ['Critical caveat', 'Commercial completion / containment is an 80% LOCAL CONTROLLED EVAL PROXY from 4/5 grounded packages; it is not customer evidence. Autonomous completion in the same run is 20%.', '', '', '', ''],
+  ['Critical caveat', 'Commercial package completion rate is 80% (4/5) in a LOCAL CONTROLLED EVAL; autonomous containment rate is 20% (1/5), human-review/escalation rate is 80% (4/5), and grounding failure rate is 20% (1/5). None is customer evidence.', '', '', '', ''],
   ['Template note', 'This workbook preserves required Day25 tab names but does not represent the missing official Day28 layout.', '', '', '', ''],
 ];
 for (let r = 7; r <= 13; r++) { s0.getRange(`B${r}:F${r}`).merge(); }
@@ -136,9 +136,9 @@ section(s1, 'A4:E4', 'Volume and completion inputs');
 s1.getRange('A5:E17').values = [
   ['Driver', 'Unit', 'Base', 'Status', 'Source / rationale'],
   ['Jobs attempted', 'jobs / month', 3000, 'ASSUMPTION', 'Planning volume for one mid-market fintech customer.'],
-  ['Completion / containment rate', '% of attempts', 0.8, 'LOCAL CONTROLLED EVAL', '4/5 grounded, schema-valid commercial packages in evidence/containment-eval.md; not production customer completion. Autonomous completion in the same run is 1/5 (20%).'],
-  ['Completed jobs', 'jobs / month', null, 'FORMULA', 'Jobs attempted x completion rate. Denominator for Cost/Job.'],
-  ['Escalation rate', '% of completed', 0.35, 'ESTIMATE', 'Human review remains material; 4/5 local cases required review, but that sample is not a production rate.'],
+  ['Commercial package completion rate', '% of attempts', 0.8, 'LOCAL CONTROLLED EVAL', '4/5 grounded, schema-valid commercial packages in evidence/containment-eval.md; not a customer rate. Separate local metrics: autonomous containment 1/5 (20%), human-review/escalation 4/5 (80%), grounding failure 1/5 (20%).'],
+  ['Completed commercial jobs', 'jobs / month', null, 'FORMULA', 'Jobs attempted x commercial package-completion rate. Denominator for Cost/Job.'],
+  ['Modelled escalation rate', '% of completed', 0.35, 'ESTIMATE', 'Planning cost assumption; separate local controlled eval observed human-review/escalation in 4/5 cases (80%), not a production rate.'],
   ['Escalated jobs', 'jobs / month', null, 'FORMULA', 'Completed jobs x escalation rate.'],
   ['Internal QA review rate', '% of completed', 0.1, 'ESTIMATE', 'Our COGS only: 10% QA sample for safety/grounding review.'],
   ['QA reviewed jobs', 'jobs / month', null, 'FORMULA', 'Completed jobs x QA review rate.'],
@@ -253,14 +253,14 @@ s2.getRange('A5:E21').values = [
   ['Usage gross margin', '%', null, 'FORMULA', 'Usage price less variable Cost/Job divided by usage price.'],
   ['Blended gross margin', '%', null, 'FORMULA', 'Monthly ARPU less monthly direct cost divided by monthly ARPU.'],
   ['GM health', 'check', null, 'FORMULA', 'Target >= 60%; >85% would trigger missing-cost audit.'],
-  ['Current / evaluated containment', '%', null, 'LOCAL CONTROLLED EVAL', 'Linked from Cost/Job: 4/5 grounded-package completion; separate autonomous completion is 20%; production containment remains unmeasured.'],
+  ['Current commercial package completion rate', '%', null, 'LOCAL CONTROLLED EVAL', 'Linked from Cost/Job: 4/5 grounded-package completion (80%); autonomous containment is 1/5 (20%) and is not compared with the package-completion threshold.'],
   ['GM target', '%', 0.6, 'DECISION RULE', 'Prompt health threshold.'],
-  ['Required containment for GM target', '%', null, 'FORMULA', 'Algebraic minimum at proposed usage price.'],
-  ['Safety buffer', 'percentage points', null, 'FORMULA', 'Controlled-eval commercial completion proxy less required containment.'],
-  ['Containment error scenario', '%', null, 'FORMULA', 'Half of current estimate: 2x relative error in the adverse direction.'],
-  ['GM at containment error scenario', '%', null, 'FORMULA', 'Shows whether a 2x error breaks the model.'],
-  ['Critical driver', 'text', 'Completion proxy; 80% -> 40% drops usage GM below 60%.', 'RED TEAM', 'At 2x adverse error, completed jobs halve and fixed cost is spread over fewer jobs.'],
-  ['Economic decision', 'check', null, 'FORMULA', 'Proceed with paid pilot only while production completion evidence improves.'],
+  ['Breakeven package-completion rate for GM target', '%', null, 'FORMULA', 'Algebraic minimum commercial package-completion rate at proposed usage price; not an autonomous-containment threshold.'],
+  ['Package-completion buffer', 'percentage points', null, 'FORMULA', 'Commercial package-completion rate less breakeven package-completion rate.'],
+  ['Package-completion error scenario', '%', null, 'FORMULA', 'Half of current commercial package-completion rate: 2x relative error in the adverse direction.'],
+  ['GM at package-completion error scenario', '%', null, 'FORMULA', 'Shows whether a 2x package-completion error breaks the model.'],
+  ['Critical driver', 'text', 'Package-completion scenario; 80% -> 40% drops usage GM below 60%.', 'RED TEAM', 'At 2x adverse package-completion error, completed commercial jobs halve and fixed cost is spread over fewer jobs.'],
+  ['Economic decision', 'check', null, 'FORMULA', 'Proceed with paid pilot only while customer package-completion evidence improves.'],
 ];
 header(s2, 'A5:E5'); body(s2, 'A6:E21');
 s2.getRange('C8').formulas = [['=C6+\'1_Cost_Job\'!C8*C7']];
@@ -274,7 +274,7 @@ s2.getRange('C16').formulas = [['=((\'1_Cost_Job\'!C6*\'1_Cost_Job\'!C29*(1+\'1_
 s2.getRange('C17').formulas = [['=C14-C16']];
 s2.getRange('C18').formulas = [['=C14/2']];
 s2.getRange('C19').formulas = [['=1-((\'1_Cost_Job\'!C6*\'1_Cost_Job\'!C29*(1+\'1_Cost_Job\'!C40)+\'1_Cost_Job\'!C43+\'1_Cost_Job\'!C45+\'1_Cost_Job\'!C6*C18*(\'1_Cost_Job\'!C51/\'1_Cost_Job\'!C8))/(C18*\'1_Cost_Job\'!C6*C7))']];
-s2.getRange('C21').formulas = [['=IF(C19>=C15,"PASS - withstands 2x adverse containment error","REMEDIATION - containment/price/cost action required")']];
+s2.getRange('C21').formulas = [['=IF(C19>=C15,"PASS - withstands 2x adverse package-completion error","REMEDIATION - package-completion/price/cost action required")']];
 section(s2, 'A23:E23', 'Value anchors');
 s2.getRange('A24:E33').values = [
   ['Driver', 'Unit', 'Base', 'Status', 'Source / rationale'],
@@ -283,7 +283,7 @@ s2.getRange('A24:E33').values = [
   ['Labor value displaced / job', 'VND / job', null, 'FORMULA', 'Minutes displaced / 60 x labor rate.'],
   ['Suggested share captured', '% of displaced value', 0.5, 'DECISION', 'Conservative 50% capture of labor value.'],
   ['Labor-replacement price anchor / job', 'VND / job', null, 'FORMULA', 'Labor value displaced x capture share.'],
-  ['Monthly customer labor savings', 'VND / month', null, 'FORMULA', 'Minutes displaced x labor rate x jobs attempted x containment.'],
+  ['Monthly customer labor savings', 'VND / month', null, 'FORMULA', 'Minutes displaced x labor rate x jobs attempted x commercial package-completion rate.'],
   ['Annual customer labor savings', 'VND / year', null, 'FORMULA', 'Monthly savings x 12.'],
   ['Proposed usage price / full labor value', '%', null, 'FORMULA', 'Usage price divided by labor value displaced.'],
   ['Anchor check', 'check', null, 'FORMULA', 'Proposed price is above floor and not above full displaced labor value.'],
@@ -300,9 +300,9 @@ s2.getRange('A36:E39').merge();
 s2.getRange('A36').values = [['Chosen value metric: Hybrid - a 30,000,000 VND/month platform fee for account-level workflow access, integration/configuration and governance/auditability plus 32,000 VND per completed, grounded investigation package; the variable charge measures a customer-visible unit with an objective boundary. Attribution is 2/5 because the 5-case local control eval produced 4/5 grounded packages but no measured analyst time saved or customer outcome, while Autonomy is 1/5 because only 1/5 completed without required human intervention and 4/5 cases routed to review. Outcome pricing is not appropriate without causal customer results; pure Seat pricing does not map cleanly to marginal AI usage and pure Usage can reduce bill predictability, so Hybrid is safer while aligning the variable charge to completed work.']];
 s2.getRange('A36:E39').format = { fill: C.paleBlue, font: { color: C.ink }, wrapText: true, verticalAlignment: 'top', borders: { preset: 'outside', style: 'thin', color: C.border } };
 s2.getRange('A36:E39').format.rowHeight = 56;
-section(s2, 'A41:F41', 'Containment Sensitivity | variable usage price = 32,000 VND / completed job');
+section(s2, 'A41:F41', 'Package-Completion Sensitivity | variable usage price = 32,000 VND / completed job');
 s2.getRange('A42:F47').values = [
-  ['Containment', 'Completed jobs', 'Escalations', 'Direct monthly cost', 'Cost / completed job', 'Usage GM'],
+  ['Package completion rate', 'Completed commercial jobs', 'Modelled escalations', 'Direct monthly cost', 'Cost / completed job', 'Usage GM'],
   [0.5, null, null, null, null, null],
   [0.6, null, null, null, null, null],
   [0.7, null, null, null, null, null],
@@ -352,7 +352,7 @@ s3.getRange('A11:E17').values = [
   ['Selected value metric', 'Hybrid', '3_Value_Metric decision table and 2_Pricing Decision Note', 'VERIFIED DECISION', 'Monthly platform fee plus per completed investigation job.'],
   ['Attribution score', 2, 'P-015 artifacts/agent_metrics.json: structured output 100%, grounding 80%; no customer time/outcome measurement.', 'PARTIAL EVIDENCE', 'Proxy quality evidence is not causal value evidence.'],
   ['Autonomy score', 1, 'P-015 evaluation_report.md and architecture docs: human review required for 4/5 cases; AI recommends only.', 'VERIFIED CURRENT STATE', 'No outcome billing until final-resolution ownership is instrumented.'],
-  ['Containment definition', 'Schema-valid grounded investigation package with required evidence/decision fields; customer final disposition recorded separately.', 'P-015 metrics-pack core action and scope; adapted for the copilot billing boundary.', 'DEFINITION', 'Bill only when objective package completion rule is met; do not treat human-gated review as autonomous completion.'],
+  ['Commercial billing job definition', 'One completed grounded investigation package with required evidence/decision fields; customer final disposition recorded separately.', 'P-015 metrics-pack core action and scope; adapted for the copilot billing boundary.', 'DEFINITION', 'Bill only when the objective package-completion rule is met; do not treat human-gated review as autonomous containment.'],
   ['Matrix result', 'Low Attribution + Low Autonomy -> Seat / Hybrid', 'Day25 assignment rule', 'VERIFIED RULE', 'Hybrid selected because variable cost scales with completed jobs.'],
   ['Decision Note', null, '2_Pricing!A36:E39', 'FORMULA LINK', 'Exactly 3 core sentences; no market override claimed.'],
 ];
@@ -436,7 +436,7 @@ s5.getRange('A4:G19').values = [
   ['Month 1 - LEARN', 'Nguyen Quang Huy', new Date('2026-09-30'), 'Evidence improvement', 'Baseline p50/p95 latency and time-on-task recorded', 'Before/after measurement protocol', 'PLANNED'],
   ['Months 2-3 - LEVERAGE', 'Nguyen Quang Huy', new Date('2026-11-30'), 'Pilot customers', '2 paid or design-partner pilots targeted', 'Pilot agreements / scope records', 'PLANNED'],
   ['Months 2-3 - LEVERAGE', 'Nguyen Quang Huy', new Date('2026-11-30'), 'Evaluated jobs', '6,000 jobs across pilot scope', 'Versioned eval report', 'PLANNED'],
-  ['Months 2-3 - LEVERAGE', 'Nguyen Quang Huy', new Date('2026-11-30'), 'Containment', '>=85% measured completion', 'Completion log with denominator', 'PLANNED'],
+  ['Months 2-3 - LEVERAGE', 'Nguyen Quang Huy', new Date('2026-11-30'), 'Package completion', '>=85% measured commercial package completion', 'Completion log with denominator; autonomous containment and escalation reported separately', 'PLANNED'],
   ['Months 2-3 - LEVERAGE', 'Nguyen Quang Huy', new Date('2026-11-30'), 'Blended GM', '>=70% after telemetry', 'Cost ledger + monthly margin review', 'PLANNED'],
   ['Months 2-3 - LEVERAGE', 'Nguyen Quang Huy', new Date('2026-11-30'), 'CAC', '<=350,000,000 VND/customer', 'CRM funnel and won-deal cost', 'PLANNED'],
   ['Months 2-3 - LEVERAGE', 'Nguyen Quang Huy', new Date('2026-11-30'), 'Sales-led KPI', '12 qualified opps and 3 wins target', 'Pipeline report', 'PLANNED'],
@@ -496,7 +496,7 @@ s4.getRange('C23').conditionalFormats.add('cellIs', { operator: 'greaterThanOrEq
 wb.comments.setSelf({ displayName: 'Nguyen Quang Huy' });
 wb.comments.addThread({ cell: s1.getRange('C26') }, 'Source: https://platform.openai.com/pricing?model=contentfilter-alpha-001 checked 2026-08-27. GPT-5.5 Standard short-context input price used in the base scenario.');
 wb.comments.addThread({ cell: s1.getRange('C44') }, 'Source: https://supabase.com/pricing checked 2026-08-27. Pro plan is $25/month; additional app/compute/logging reserve is an explicit assumption.');
-wb.comments.addThread({ cell: s2.getRange('C16') }, 'Formula: solve direct_cost / (price x attempts x containment) <= 1 - GM_target. QA cost per completion is included in the denominator adjustment.');
+wb.comments.addThread({ cell: s2.getRange('C16') }, 'Formula: solve for the commercial package-completion rate p in direct_cost / (price x attempts x p, with QA cost per completed package) <= 1 - GM_target. This is not an autonomous-containment threshold; local autonomous containment is 20%.');
 
 await fs.mkdir(`${ROOT}/deliverables`, { recursive: true });
 await fs.mkdir(QA, { recursive: true });

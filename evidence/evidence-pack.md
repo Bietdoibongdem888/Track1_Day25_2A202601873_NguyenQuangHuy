@@ -4,17 +4,17 @@
 
 Status: **PARTIAL**.
 
-Existing evidence: a reproducible five-case local control evaluation with 4/5 grounded commercial packages (80% completion proxy), 1/5 autonomous completions (20%), 4/5 human-review cases and one grounding failure; plus agent/RAG/safety and upstream ML reports.
+Existing evidence: a reproducible small five-case local control evaluation with commercial package completion 4/5 (80%), autonomous containment 1/5 (20%), human-review/escalation 4/5 (80%) and grounding failure 1/5 (20%); plus agent/RAG/safety and upstream ML reports.
 
 Source: [`eval-evidence.md`](eval-evidence.md), [`containment-eval.csv`](containment-eval.csv), and P-015 `artifacts/agent/*`, `artifacts/ml/lightgbm/metrics.json`, generated from the local P-015 evaluator on 2026-08-13 and derived on 2026-08-27.
 
-Gap: no customer-level containment, persisted customer final-disposition log, paired manual-vs-Copilot time measurement or production retry telemetry.
+Gap: no customer-level autonomous containment, persisted customer final-disposition log, paired manual-vs-Copilot time measurement or production retry telemetry.
 
 Owner: Nguyen Quang Huy.
 
 Deadline: 2026-09-30.
 
-Exact completion criterion: produce a versioned 300-case manifest with eligible alerts, grounded package completion, autonomous completion, human-review/escalation status, persisted final disposition, retry events, p50/p95 latency and paired time-on-task measurements.
+Exact completion criterion: produce a versioned 300-case manifest with eligible alerts, grounded package completion, autonomous containment, human-review/escalation status, persisted final disposition, retry events, p50/p95 latency and paired time-on-task measurements.
 
 ## 2. Risk Checklist
 
@@ -46,7 +46,7 @@ Owner: Nguyen Quang Huy for measurement design and report; customer fraud team o
 
 Start date: 2026-10-01. End date: 2026-11-26. Report deadline: 2026-12-04.
 
-Exact completion criterion: two design partners with 4–8 analysts total, at least 6,000 labeled eligible investigations, completion/containment, correction/escalation rate, p50/p95 investigation time, retry rate, direct Cost/Job, safety outcomes and a user acceptance question answered. Success requires >=85% measured package completion, >=70% blended GM after telemetry, no unsafe auto-action, and a paired time-saved measurement without claiming it in advance.
+Exact completion criterion: two design partners with 4–8 analysts total, at least 6,000 labeled eligible investigations, commercial package completion, autonomous containment, human-review/escalation rate, grounding failures, p50/p95 investigation time, retry rate, direct Cost/Job, safety outcomes and a user acceptance question answered. Success requires >=85% measured package completion, autonomous containment reported separately, >=70% blended GM after telemetry, no unsafe auto-action, and a paired time-saved measurement without claiming it in advance.
 
 ## Procurement objection table
 

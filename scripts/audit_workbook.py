@@ -85,7 +85,13 @@ def main() -> int:
     if retry <= 0: failures.append("retry")
     if not hitl: failures.append("hitl")
     if completed <= 0: failures.append("denominator")
-    print(f"AUTOMATED CHECK - GM target and breakeven present: {'PASS' if val(sheets, '2_Pricing', 'C16') and val(sheets, '2_Pricing', 'C15') else 'FAIL'}")
+    print(f"AUTOMATED CHECK - GM target and package-completion breakeven present: {'PASS' if val(sheets, '2_Pricing', 'C16') and val(sheets, '2_Pricing', 'C15') else 'FAIL'}")
+    breakeven_label = str(val(sheets, "2_Pricing", "A16") or "")
+    breakeven_formula = str(formula(sheets, "2_Pricing", "C16") or "")
+    semantic_formula_ok = "containment" not in breakeven_label.lower() and "C6" in breakeven_formula and "C7" in breakeven_formula and "C15" in breakeven_formula and "C8" in breakeven_formula
+    print(f"SEMANTIC CHECK - C16 is package-completion formula, not autonomous-containment formula: {'PASS' if semantic_formula_ok else 'FAIL'} ({breakeven_label})")
+    if not semantic_formula_ok:
+        failures.append("semantic:C16")
     unit_blended = val(sheets, "2_Pricing", "C11") not in (None, "") and val(sheets, "2_Pricing", "C12") not in (None, "")
     print(f"AUTOMATED CHECK - unit/blended GM present: {'PASS' if unit_blended else 'FAIL'}")
     if not unit_blended:
@@ -96,7 +102,7 @@ def main() -> int:
         failures.append("sensitivity")
     print(f"AUTOMATED CHECK - benchmark dates present: {'PASS' if val(sheets, '6_Benchmarks', 'H5') and val(sheets, '6_Benchmarks', 'H6') else 'FAIL'}")
     print(f"MANUAL RUBRIC CHECK - official template: BLOCKED / substitute disclosed")
-    print(f"MANUAL RUBRIC CHECK - customer containment: LOCAL CONTROLLED EVAL PROXY / production pilot required")
+    print(f"MANUAL RUBRIC CHECK - autonomous containment: 20% (1/5); package completion 80% (4/5) is separate")
     print(f"AUTOMATED AUDIT STATUS: {'PASS' if not failures else 'FAIL'}")
     return 0 if not failures else 1
 

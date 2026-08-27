@@ -52,8 +52,8 @@ def main() -> int:
         "floor": num(data[("2_Pricing", "C9")]),
         "usage": num(data[("2_Pricing", "C7")]),
         "gm": num(data[("2_Pricing", "C12")]),
-        "containment": num(data[("2_Pricing", "C14")]),
-        "breakeven": num(data[("2_Pricing", "C16")]),
+        "package_completion_rate": num(data[("2_Pricing", "C14")]),
+        "breakeven_package_completion_rate": num(data[("2_Pricing", "C16")]),
         "arpu": num(data[("4_Channel_Fit", "C8")]),
         "cac_budget": num(data[("4_Channel_Fit", "C11")]),
         "estimated_cac": num(data[("4_Channel_Fit", "C23")]),
@@ -76,8 +76,8 @@ def main() -> int:
         "floor": "22,945",
         "usage": "32,000",
         "gm": "82.8%",
-        "containment": "80%",
-        "breakeven": "44.3%",
+        "package_completion_rate": "80%",
+        "breakeven_package_completion_rate": "44.3%",
         "arpu": "106.8M",
         "cac_budget": ("1,061M", "1.061B"),
         "estimated_cac": "350M",
@@ -87,7 +87,10 @@ def main() -> int:
         "affordability_ratio": "3.03x",
         "deals_day": "0.013",
         "autonomous": "20%",
+        "human_review": "80%",
+        "grounding_failure": "20%",
         "package_count": "4/5",
+        "package_completion_label": "package-completion",
     }
     ok = True
     for key, marker in checks.items():

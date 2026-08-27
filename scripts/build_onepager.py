@@ -181,8 +181,8 @@ def metric_table(doc):
         ("22,945", "PRICE FLOOR", NAVY),
         ("32,000 + 30M", "USAGE + PLATFORM", TEAL),
         ("82.8%", "BLENDED GM", GREEN),
-        ("80% EVAL", "CONTAINMENT PROXY", GOLD),
-        ("44.3%", "GM BREAKEVEN", RED),
+        ("80% EVAL", "PACKAGE COMPLETION", GOLD),
+        ("44.3%", "BREAKEVEN PACKAGE RATE", RED),
     ]
     for cell, (value, label, accent) in zip(table.rows[0].cells, values):
         set_cell_shading(cell, LIGHT)
@@ -291,9 +291,10 @@ def build():
     labeled(pricing, "Value metric", "Hybrid: 30M VND platform fee/month + 32,000 VND per completed job.")
     labeled(pricing, "Base fee", "30M/month purchases account-level workflow access, integration/configuration and governance/auditability; it is not a second charge for the package itself.", size=7.45)
     labeled(pricing, "Unit GM", "76.1% on variable usage; 82.8% blended after the 30M/month platform fee at the base case.", size=7.35)
-    labeled(pricing, "Rationale", "Attribution 2/5: the 5-case local control eval produced 4/5 grounded packages (80%), but no customer time-saved or outcome measurement. Autonomy 1/5: only 1/5 completed without required human intervention; the product routes 4/5 cases to review. Hybrid follows the low-attribution/low-autonomy matrix and avoids unsupported outcome billing.", size=7.4, after=3)
+    labeled(pricing, "Breakeven package-completion rate", "44.3% at the 60% usage-GM target; current commercial package completion is 80%, for a +35.7 pp package-completion buffer. Autonomous containment is 20% and is not compared with this threshold.", size=7.1)
+    labeled(pricing, "Rationale", "Attribution 2/5: the 5-case local control eval produced 4/5 grounded packages (80%), but no customer time-saved or outcome measurement. Autonomy 1/5: autonomous containment is 1/5 (20%), while 4/5 cases require human review. Hybrid follows the low-attribution/low-autonomy matrix and avoids unsupported outcome billing.", size=7.4, after=3)
     labeled(pricing, "Value anchor", "15 min evidence assembly displaced at 250,000 VND/hour = 62,500 VND/job full value; 50% capture = 31,250 VND/job. Proposed 32,000 VND is above the 22,945 VND floor and below full labor value.", size=7.5)
-    add_cell_note(pricing, "RED TEAM: if the 80% package-completion proxy is wrong by 2x to 40%, usage GM falls to 56.1%. Production completion is the economic gate.")
+    add_cell_note(pricing, "RED TEAM: if the 80% commercial package-completion rate is wrong by 2x to 40%, usage GM falls to 56.1%. Autonomous containment is 20% and is not compared with the package-completion threshold.")
 
     block_title(gtm, "02 | GTM", "One channel for 90 days: Sales-Led")
     labeled(gtm, "Affordability", "ARPU 106.8M VND/month | ACV 1.282B VND / $49.3K reference | 12-month payback", size=7.7)
@@ -302,11 +303,11 @@ def build():
     labeled(gtm, "Pain Moment", "09:00-11:00 after an overnight alert burst: a fraud analyst triages high-risk transactions in the existing fraud-operations alert queue/dashboard and needs a grounded case package before manual disposition.", size=7.15)
     labeled(gtm, "Surface", "User-facing: existing fraud-analyst alert investigation queue/dashboard side panel. Backend: Kafka fraud_alerts -> fraud engine/agent -> REST /api/v1/fraud/analyze. Live integration is PARTIAL / NOT VERIFIED.", size=7.05)
     labeled(gtm, "Month 1 | Learn", "Target 2 design partners, 8 interviews, 300 labeled jobs; produce pain notes, failure taxonomy and time-on-task baseline.", size=7.5)
-    labeled(gtm, "Months 2-3 | Leverage", "Target 2 pilots / 6,000 jobs / >=85% completion / >=70% GM / CAC <=350M; track 12 qualified opportunities and 3 wins.", size=7.5)
-    labeled(gtm, "Month 4+ | Expand", "Only after >=85% completion, 2 paying customers and security-gap closure. Next niche: multi-merchant payment processors.", size=7.5)
+    labeled(gtm, "Months 2-3 | Leverage", "Target 2 pilots / 6,000 jobs / >=85% package completion / autonomous containment measured separately / >=70% GM / CAC <=350M; track 12 qualified opportunities and 3 wins.", size=7.35)
+    labeled(gtm, "Month 4+ | Expand", "Only after >=85% package completion, autonomous containment and 2 paying customers plus security-gap closure. Next niche: multi-merchant payment processors.", size=7.35)
 
     block_title(evidence, "03 | EVIDENCE", "Procurement can see what is proven and what is open")
-    labeled(evidence, "Eval Results", "PARTIAL. Local control eval: 5 attempted, 4 grounded packages (80% commercial completion proxy), 1 autonomous completion (20%), 4 human-review cases and 1 grounding failure; retry telemetry is not instrumented. Eight RAG queries: 100% citation accuracy. Upstream ML recall: 80.08% validation / 84.84% integration. Not customer evidence.", size=7.2)
+    labeled(evidence, "Eval Results", "PARTIAL. Small local control eval: 5 attempted, commercial package completion 4/5 (80%), autonomous containment 1/5 (20%), human-review/escalation 4/5 (80%), grounding failures 1/5 (20%); retry telemetry is not instrumented. Eight RAG queries: 100% citation accuracy. Upstream ML recall: 80.08% validation / 84.84% integration. Not customer evidence.", size=7.0)
     labeled(evidence, "Risk Checklist", "PARTIAL. Grounding, fallback, injection defense, score preservation, redaction and human review are evidenced. Auth/RBAC, rate limit, TLS, retention/deletion, durable audit export, vendor terms and live deployment remain open.", size=7.35)
     labeled(evidence, "Pilot Report", "MISSING EVIDENCE. No customer or participant is fabricated. PLANNED - NOT YET EXECUTED: start 2026-10-01, end 2026-11-26, 2 design partners, 6,000 jobs; owner Nguyen Quang Huy; measure completion, time saved, latency, retries, Cost/Job and safety.", size=7.25)
     labeled(evidence, "Submission gate", "READY WITH DISCLOSED LIMITATIONS. Official Day28 templates were not found locally; this memo and workbook are transparent substitutes. All numeric memo claims trace to workbook cells in evidence/onepager-traceability.md. Production readiness remains gated.", size=7.2)

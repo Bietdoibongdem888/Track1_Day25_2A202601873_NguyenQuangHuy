@@ -1,6 +1,6 @@
 # Eval Results evidence
 
-Status: **PARTIAL — LOCAL CONTROLLED EVAL exists; production customer containment is not measured.**
+Status: **PARTIAL — LOCAL CONTROLLED EVAL exists; production/customer autonomous containment is not measured.**
 
 Existing evidence: P-015's deterministic E2E evaluator, agent/RAG/safety metrics, upstream LightGBM metrics, and the derived case-level record in [`containment-eval.csv`](containment-eval.csv).
 
@@ -12,7 +12,7 @@ Owner: Nguyen Quang Huy.
 
 Deadline: 2026-09-30 for a versioned 300-case job manifest and baseline protocol.
 
-Exact completion criterion: count eligible alert opportunities, schema-valid grounded investigation packages, human-review cases, grounding failures, persisted final dispositions and observed retries; report commercial package completion, autonomous completion, escalation rate, retry rate and p50/p95 latency separately.
+Exact completion criterion: count eligible alert opportunities, schema-valid grounded investigation packages, human-review cases, grounding failures, persisted final dispositions and observed retries; report commercial package completion, autonomous containment, human-review/escalation rate, retry rate and p50/p95 latency separately.
 
 ## Job-level controlled evaluation
 
@@ -21,14 +21,14 @@ This is **LOCAL CONTROLLED EVAL — NOT PRODUCTION CUSTOMER EVIDENCE**. The comm
 | Metric | Result | Interpretation |
 |---|---:|---|
 | Attempted jobs | 5 | E2E-A through E2E-E from the existing P-015 evaluator. |
-| Completed grounded packages | 4 | 80.0% commercial completion / containment proxy. |
-| Escalated / human review required | 4 | 80.0%; consistent with a human-gated copilot, not an autonomous outcome service. |
-| Completed autonomously | 1 | 20.0%; reported separately from commercial completion. |
-| Failed grounding cases | 1 | E2E-D had a missing/malformed ML score and was routed to review. |
+| Commercial package completion rate | 4/5 = 80.0% | One completed commercial job is one completed grounded investigation package. |
+| Human-review / escalation rate | 4/5 = 80.0% | Consistent with a human-gated copilot, not an autonomous outcome service. |
+| Autonomous containment rate | 1/5 = 20.0% | Completed without required human intervention; reported separately from commercial package completion. |
+| Grounding failure rate | 1/5 = 20.0% | E2E-D had a missing/malformed ML score and was routed to review. |
 | Retry events | 0 explicit events | Retry instrumentation is not present in the source evaluator. |
 | Retry rate | NOT MEASURED | The cost model retains an explicit 8% planning estimate until telemetry exists. |
 
-The reproducible derivation and every case-level field are in [`containment-eval.md`](containment-eval.md) and [`containment-eval.csv`](containment-eval.csv). The 80% model input is therefore a **LOCAL CONTROLLED EVAL PROXY**, not an observed customer rate.
+The reproducible derivation and every case-level field are in [`containment-eval.md`](containment-eval.md) and [`containment-eval.csv`](containment-eval.csv). The 80% model input is therefore a **LOCAL CONTROLLED EVAL commercial package-completion rate**, not autonomous containment or an observed customer rate.
 
 ## Agent and RAG evidence
 

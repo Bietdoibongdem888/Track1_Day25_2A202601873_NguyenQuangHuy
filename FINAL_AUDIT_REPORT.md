@@ -16,7 +16,7 @@ The recovery pass closes the previously recoverable rubric gaps with reproducibl
 
 ## Recovery Summary
 
-1. Recovered the 80% containment wording into an auditable local controlled-evaluation proxy: 5 attempted cases, 4 grounded commercial packages, 1 autonomous completion, 4 human-review routes and 1 grounding failure.
+1. Corrected the 80% terminology: it is commercial package completion, while autonomous containment is 20%, human-review/escalation is 80% and grounding failure is 20% in the five-case local controlled evaluation.
 2. Added the missing economic recovery mechanics: completed-job denominator, 3x price floor, usage versus blended GM, 50%-90% sensitivity, base-fee role and value-created anchor audit.
 3. Added ACV USD reference, affordability ratio, cost/opportunity bridge, deals/day, exact Pain Moment, user-facing surface and backend integration path.
 4. Rewrote the Eval, Risk and Pilot evidence blocks with status, source, gap, owner, deadline and measurable acceptance criteria.
@@ -44,10 +44,13 @@ P-015 is a B2B AI Fraud Investigation Copilot that assembles grounded evidence, 
 - completed: 4 schema-valid, grounded investigation packages (80% local package-completion proxy)
 - escalated: 4 cases routed to human review; customer final disposition is recorded separately and is not measured
 - failures: 1 failed grounding case; 0 unsafe auto-actions in the source report
-- containment: 80% local controlled-evaluation package proxy, not production/customer containment; autonomous completion is 20%
+- commercial package completion rate: 80% (4/5); not production/customer evidence
+- autonomous containment rate: 20% (1/5)
+- human-review/escalation rate: 80% (4/5)
+- grounding failure rate: 20% (1/5)
 - retry: NOT MEASURED in the source evaluator; the workbook retains an 8% retry planning estimate and labels it as such
 
-The five-case local evaluator is a reproducible control check, not customer evidence. The newer 30-sample conversational `fraud-agent-v2` benchmark is intentionally excluded from containment because it does not produce a completed investigation package or production disposition outcome.
+The five-case local evaluator is a reproducible control check, not customer evidence. The newer 30-sample conversational `fraud-agent-v2` benchmark is intentionally excluded from autonomous-containment measurement because it does not produce a completed investigation package or production disposition outcome.
 
 ## Economics
 
@@ -56,9 +59,9 @@ The five-case local evaluator is a reproducible control check, not customer evid
 - base fee: 30,000,000 VND/month for account-level workflow access, integration/configuration and governance/auditability; it is not a second charge for the same package.
 - unit GM: 76.1% on variable usage economics.
 - blended GM: 82.8% including the base fee at the 3,000-attempt base case.
-- breakeven containment: 44.3% at the 60% usage-GM target.
-- safety buffer: 35.7 percentage points from the 80% local package proxy to breakeven.
-- critical sensitivity: at 40% completion/containment, completed jobs halve and usage GM falls to 56.1%; the workbook also shows 50%, 60%, 70%, 80% and 90% cases.
+- breakeven package-completion rate: 44.3% at the 60% usage-GM target; this is not an autonomous-containment threshold.
+- safety buffer: 35.7 percentage points from the 80% commercial package-completion rate to breakeven.
+- critical sensitivity: at 40% package completion, completed commercial jobs halve and usage GM falls to 56.1%; the workbook also shows 50%, 60%, 70%, 80% and 90% cases.
 
 ## Value Metric
 
@@ -100,7 +103,8 @@ Backend: Kafka `fraud_alerts` -> fraud engine/agent -> REST `/api/v1/fraud/analy
 ## Verification
 
 - formula audit: PASS - workbook ZIP integrity, exact tabs, required formulas, no formula error tokens, positive completed denominator, non-zero retry planning input, HITL presence, GM/breakeven, sensitivity formulas and benchmark dates.
-- number crosscheck: PASS - workbook and editable one-pager agree on Cost/Job, floor, price, GM, containment, breakeven, ACV reference, CAC budget, estimated CAC, affordability ratio and deals/day.
+- semantic formula audit: PASS - `2_Pricing!C16` solves Case A commercial package-completion rate; autonomous containment at 20% is not compared with the 44.3% threshold.
+- number crosscheck: PASS - workbook and editable one-pager agree on Cost/Job, floor, price, GM, package completion, package-completion breakeven, ACV reference, CAC budget, estimated CAC, affordability ratio and deals/day.
 - Excel visual QA: PASS - all seven sheets rendered and inspected; no clipping, `#####` or formula-error tokens observed.
 - PDF visual QA: PASS - Poppler reports one letter-size page; rasterized page inspected with no clipping, overflow, broken tables or unreadable core metrics.
 - DOCX conversion note: a headless Office converter is unavailable in this environment; the PDF is a controlled reportlab export using the same one-page content, while the DOCX remains the editable source.
@@ -129,7 +133,7 @@ Rubric self-audit: 100/100 supported by current artifacts; not a guaranteed inst
 ## Remaining Limitations
 
 - Official Day28 Excel/DOCX templates were not found; the substitute layout is disclosed in `templates/SEARCH_LOG.md`.
-- The local controlled evaluation has five relevant E2E cases. Its 80% package-completion rate is not customer containment; autonomous completion is 20% and retry telemetry is not measured.
+- The local controlled evaluation has five relevant E2E cases. Its 80% commercial package completion is not autonomous containment or customer evidence; autonomous containment is 20% and retry telemetry is not measured.
 - No customer pilot, analyst time-saved measurement, causal outcome, production deployment or live Kafka integration is claimed.
 - Production auth/RBAC, rate limiting, TLS, retention/deletion, durable audit export, vendor data-use terms, SLA and certification claims remain open with owners and deadlines in the risk evidence.
 - DOCX-to-PDF conversion through a headless office engine is unavailable in this environment; PDF visual QA covers the controlled PDF export.

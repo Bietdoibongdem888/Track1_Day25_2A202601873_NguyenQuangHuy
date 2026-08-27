@@ -19,7 +19,7 @@ def main() -> int:
         xml = archive.read("word/document.xml").decode("utf-8", errors="ignore")
     reader = PdfReader(str(pdf))
     pdf_text = "\n".join(page.extract_text() or "" for page in reader.pages)
-    markers = ["P-015", "7,648", "32,000", "82.8%", "Sales-Led", "PARTIAL"]
+    markers = ["P-015", "7,648", "32,000", "76.1%", "82.8%", "44.3%", "Sales-Led", "PARTIAL", "autonomous containment", "human-review", "package-completion"]
     ok = True
     for marker in markers:
         present = marker in xml or marker in pdf_text

@@ -122,7 +122,7 @@ def build():
         p("82.8%", "MetricValue"), p("80% EVAL", "MetricValue"), p("44.3%", "MetricValue"),
     ], [
         p("VND / JOB", "MetricLabel"), p("PRICE FLOOR", "MetricLabel"), p("USAGE + PLATFORM", "MetricLabel"),
-        p("BLENDED GM", "MetricLabel"), p("CONTAINMENT PROXY", "MetricLabel"), p("GM BREAKEVEN", "MetricLabel"),
+        p("BLENDED GM", "MetricLabel"), p("PACKAGE COMPLETION", "MetricLabel"), p("BREAKEVEN PACKAGE RATE", "MetricLabel"),
     ]]
     metrics = Table(metric_data, colWidths=[doc.width / 6] * 6, rowHeights=[0.21 * inch, 0.16 * inch])
     metrics.setStyle(TableStyle([
@@ -145,10 +145,11 @@ def build():
             labeled("Value metric", "Hybrid: 30M VND platform fee/month + 32,000 VND per completed job."),
             labeled("Base fee", "30M/month purchases account-level workflow access, integration/configuration and governance/auditability; it is not a second charge for the package itself.", "SmallBody"),
             labeled("Unit GM", "76.1% on variable usage; 82.8% blended after the 30M/month platform fee at the base case.", "SmallBody"),
-            labeled("Rationale", "Attribution 2/5: the 5-case local control eval produced 4/5 grounded packages (80%), but no customer time-saved or outcome measurement. Autonomy 1/5: only 1/5 completed without required human intervention; 4/5 cases route to review. Hybrid follows the low-attribution/low-autonomy matrix and avoids unsupported outcome billing.", "SmallBody"),
+            labeled("Breakeven package-completion rate", "44.3% at the 60% usage-GM target; current commercial package completion is 80%, for a +35.7 pp package-completion buffer. Autonomous containment is 20% and is not compared with this threshold.", "SmallBody"),
+            labeled("Rationale", "Attribution 2/5: the 5-case local control eval produced 4/5 grounded packages (80%), but no customer time-saved or outcome measurement. Autonomy 1/5: autonomous containment is 1/5 (20%), while 4/5 cases require human review. Hybrid follows the low-attribution/low-autonomy matrix and avoids unsupported outcome billing.", "SmallBody"),
             labeled("Value anchor", "15 min at 250,000 VND/hour = 62,500 VND/job full value; 50% capture = 31,250 VND/job. Proposed 32,000 VND is above the 22,945 VND floor and below full labor value.", "SmallBody"),
         ],
-        "RED TEAM: if the 80% package-completion proxy is wrong by 2x to 40%, usage GM falls to 56.1%. Production completion is the economic gate.", ORANGE, "Note",
+        "RED TEAM: if the 80% commercial package-completion rate is wrong by 2x to 40%, usage GM falls to 56.1%. Autonomous containment is 20% and is not compared with the package-completion threshold.", ORANGE, "Note",
     )
     gtm = block(
         "02 | GTM",
@@ -160,15 +161,15 @@ def build():
             labeled("Pain Moment", "09:00-11:00 after an overnight alert burst: a fraud analyst triages high-risk transactions in the existing fraud-operations alert queue/dashboard and needs a grounded case package before manual disposition.", "SmallBody"),
             labeled("Surface", "User-facing: existing fraud-analyst alert investigation queue/dashboard side panel. Backend: Kafka fraud_alerts -> fraud engine/agent -> REST /api/v1/fraud/analyze. Live integration is PARTIAL / NOT VERIFIED.", "SmallBody"),
             labeled("Month 1 | Learn", "2 design partners, 8 interviews, 300 labeled jobs; produce pain notes, failure taxonomy and time-on-task baseline.", "SmallBody"),
-            labeled("Months 2-3 | Leverage", "2 pilots / 6,000 jobs / >=85% completion / >=70% GM / CAC <=350M; track 12 qualified opportunities and 3 wins.", "SmallBody"),
-            labeled("Month 4+ | Expand", "Only after >=85% completion, 2 paying customers and security-gap closure. Next niche: multi-merchant payment processors.", "SmallBody"),
+            labeled("Months 2-3 | Leverage", "2 pilots / 6,000 jobs / >=85% package completion / autonomous containment measured separately / >=70% GM / CAC <=350M; track 12 qualified opportunities and 3 wins.", "SmallBody"),
+            labeled("Month 4+ | Expand", "Only after >=85% package completion, autonomous containment and 2 paying customers plus security-gap closure. Next niche: multi-merchant payment processors.", "SmallBody"),
         ],
     )
     evidence = block(
         "03 | EVIDENCE",
         "Procurement can see what is proven and what is open",
         [
-            labeled("Eval Results", "PARTIAL. Local control eval: 5 attempted, 4 grounded packages (80% commercial completion proxy), 1 autonomous completion (20%), 4 human-review cases and 1 grounding failure; retry telemetry is not instrumented. Eight RAG queries: 100% citation accuracy. Upstream ML recall: 80.08% validation / 84.84% integration. Not customer evidence.", "SmallBody"),
+            labeled("Eval Results", "PARTIAL. Small local control eval: 5 attempted, commercial package completion 4/5 (80%), autonomous containment 1/5 (20%), human-review/escalation 4/5 (80%), grounding failures 1/5 (20%); retry telemetry is not instrumented. Eight RAG queries: 100% citation accuracy. Upstream ML recall: 80.08% validation / 84.84% integration. Not customer evidence.", "SmallBody"),
             labeled("Risk Checklist", "PARTIAL. Grounding, fallback, injection defense, score preservation, redaction and human review are evidenced. Auth/RBAC, rate limit, TLS, retention/deletion, durable audit export, vendor terms and live deployment remain open.", "SmallBody"),
             labeled("Pilot Report", "MISSING EVIDENCE. No customer or participant is fabricated. PLANNED - NOT YET EXECUTED: start 2026-10-01, end 2026-11-26, 2 design partners, 6,000 jobs; owner Nguyen Quang Huy; measure completion, time saved, latency, retries, Cost/Job and safety.", "SmallBody"),
             labeled("Submission gate", "READY WITH DISCLOSED LIMITATIONS. Official Day28 templates were not found locally; this memo and workbook are transparent substitutes. Numeric claims trace to workbook cells in evidence/onepager-traceability.md. Production readiness remains gated.", "SmallBody"),
