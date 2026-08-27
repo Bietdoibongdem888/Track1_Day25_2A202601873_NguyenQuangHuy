@@ -1,0 +1,10 @@
+node_modules/
+deliverables/*.inspect.ndjson
+backups/
+.env
+.env.*
+credentials*
+secrets/
+*.tmp
+~$*
+cache/
